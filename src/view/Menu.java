@@ -34,7 +34,9 @@ public class Menu extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Asteroids Menu");
         setBounds(new java.awt.Rectangle(0, 0, 625, 417));
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/images/IconGame.png")).getImage());
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(81, 33, 105));

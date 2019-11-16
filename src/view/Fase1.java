@@ -6,6 +6,7 @@
 package view;
 
 import control.Metricas;
+import java.awt.Toolkit;
 import java.util.Random;
 import model.Asteroides;
 import model.Bullets;
@@ -46,6 +47,8 @@ public class Fase1 extends javax.swing.JFrame {
         jLabelNumLifes = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Asteroids");
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/images/IconGame.png")).getImage());
         addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 formKeyPressed(evt);
@@ -147,13 +150,13 @@ public class Fase1 extends javax.swing.JFrame {
 
                     // Verifica se a qunatidade de vidas acabou
                     if (Metricas.lifes == 0) {
-                        
+
                         stop();
                     }
-                    
+
                     // Aumenta a velocidade de geração dos asteroides
-                    if(Metricas.score > 100){
-                        Metricas.time -=50;
+                    if (Metricas.score > 100) {
+                        Metricas.time -= 50;
                     }
                     System.out.println("time: " + Metricas.time);
                     try {
@@ -239,4 +242,5 @@ public class Fase1 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelNumScore;
     private javax.swing.JPanel jPanelFase1;
     // End of variables declaration//GEN-END:variables
+
 }
