@@ -21,13 +21,6 @@ public class nave extends JLabel {
     private static int width = 85;
     private static int height = 72;
 
-    public nave() {
-        this.x = 280;
-        this.y = 330;
-        setBounds(x, y, width, height);
-        //setIcon(new javax.swing.ImageIcon(getClass().getResource("../images/Nave.png")));
-    }
-
     public nave(int x, int y) {
         this.x = x;
         this.y = y;
@@ -48,7 +41,7 @@ public class nave extends JLabel {
         x = getX();
         y = getY();
         x -= andar;
-
+        
         setBounds(x, y, width, height);
     }
 
