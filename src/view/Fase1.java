@@ -6,7 +6,6 @@
 package view;
 
 import control.Metricas;
-import java.awt.Toolkit;
 import java.util.Random;
 import model.Asteroides;
 import model.Bullets;
@@ -25,7 +24,9 @@ public class Fase1 extends javax.swing.JFrame {
     nave nave;
     Bullets tiro;
     Asteroides ast;
-
+    
+    
+    
     ThreadPrincipal thread;
 
     public Fase1() {
@@ -33,6 +34,9 @@ public class Fase1 extends javax.swing.JFrame {
 
         gerarNave();
         gerarAst();
+        
+        
+
 
     }
 
@@ -55,16 +59,22 @@ public class Fase1 extends javax.swing.JFrame {
             }
         });
 
+        jPanelFase1.setBackground(new java.awt.Color(120, 65, 147));
+
         jLabel1.setFont(new java.awt.Font("Comic Sans MS", 3, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Score: ");
 
         jLabelNumScore.setFont(new java.awt.Font("Comic Sans MS", 3, 24)); // NOI18N
+        jLabelNumScore.setForeground(new java.awt.Color(255, 255, 255));
         jLabelNumScore.setText("0");
 
         jLabelLifes.setFont(new java.awt.Font("Comic Sans MS", 3, 24)); // NOI18N
+        jLabelLifes.setForeground(new java.awt.Color(255, 255, 255));
         jLabelLifes.setText("Lifes:");
 
         jLabelNumLifes.setFont(new java.awt.Font("Comic Sans MS", 3, 24)); // NOI18N
+        jLabelNumLifes.setForeground(new java.awt.Color(255, 255, 255));
         jLabelNumLifes.setText("3");
 
         javax.swing.GroupLayout jPanelFase1Layout = new javax.swing.GroupLayout(jPanelFase1);
@@ -119,6 +129,8 @@ public class Fase1 extends javax.swing.JFrame {
 
         tiro = new Bullets(a, b);
         jPanelFase1.add(tiro);
+        
+        // Fazer testes desses metodos
         //jPanelFase1.validate();
         //jPanelFase1.repaint();
 
@@ -131,17 +143,7 @@ public class Fase1 extends javax.swing.JFrame {
             @Override
             public void run() {
                 while (true) {
-                    // Pausa
-                    if (!Metricas.inGame) {
-                        suspend();
-                    }else{
-                        resume();
-                    }
-                    /* retorna a execucao da thread
-                    if (Metricas.inGame == true) {
-                        resume();
-                    }
-                    */
+
                     Random random = new Random();
                     int low = -30;
                     int hight = 0;
@@ -153,33 +155,38 @@ public class Fase1 extends javax.swing.JFrame {
 
                     ast = new Asteroides(x, y);
                     jPanelFase1.add(ast);
+                    // fazer teste com esses metodos
                     //jPanelFase1.validate();
                     //jPanelFase1.repaint();
 
                     // Funcao de movimentacao do asteroide
                     thread = new ThreadPrincipal(nave, ast, jPanelFase1, jLabelNumScore, jLabelNumLifes);
 
+                    // Aumenta a velocidade de geração dos asteroides
+                    if (Metricas.score >= 100) {
+                        Metricas.time -= 100;
+                    }
+                    
                     // Verifica se a qunatidade de vidas acabou
-                    if (Metricas.lifes == 0) {
-                        // colocar joptional pane
+                    if (Metricas.lifes == 0){
                         stop();
                     }
-
-                    // Aumenta a velocidade de geração dos asteroides
-                    if (Metricas.score > 100) {
-                        Metricas.time -= 50;
-                    }
+                    
                     System.out.println("time: " + Metricas.time);
+                    
                     try {
                         Thread.sleep(Metricas.time);
                     } catch (InterruptedException ex) {
                         ex.printStackTrace();
                     }
+
                     jPanelFase1.updateUI();
                 }
+
             }
 
         }.start();
+
     }
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
@@ -202,13 +209,13 @@ public class Fase1 extends javax.swing.JFrame {
         }
         // pause
         if (evt.getKeyChar() == 'p' || evt.getKeyChar() == 'P') {
-            Metricas.inGame = false;
-            thread.stop();
+            //Metricas.inGame = false;
+            //thread.stop();
         }
         // retorna a execucao da thread
         if (evt.getKeyChar() == 'o' || evt.getKeyChar() == 'O') {
-            Metricas.inGame = true;
-            thread.resume();
+            // Metricas.inGame = true;
+            // thread.resume();
         }
 
 

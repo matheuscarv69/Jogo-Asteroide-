@@ -7,12 +7,13 @@ package threads;
 
 import control.Metricas;
 import java.awt.Rectangle;
-import javax.swing.ImageIcon;
+import javax.swing.Icon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import model.Asteroides;
 import model.Bullets;
 import model.nave;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -23,7 +24,6 @@ public class ThreadPrincipal extends Thread {
     private nave nave;
     private Bullets tiro;
     private Asteroides ast;
-
     private JPanel jPanel;
     private JLabel pontos;
     private JLabel vidas;
@@ -40,14 +40,9 @@ public class ThreadPrincipal extends Thread {
 
     //@Override
     public void run() {
-        while (true) {
-            // pausa
-            if (!Metricas.inGame) {
-                suspend();
-            } else {
-                resume();
-            }
-            
+        // aqui o booleano inGame está dentro do while para parar de executar quando for setado com false
+        // dessa forma ele não gera dois jOptionPane
+        while (Metricas.inGame) {
             ast.movAst();
 
             // Remove o asteroide ao atingir y = 420
@@ -71,11 +66,12 @@ public class ThreadPrincipal extends Thread {
             }
             // Muda a imagem da nave de acordo com a quantidade de vidas
             mudaNave();
-            // para movimentos dos asteroides se vida zerar
+
+            /* para movimentos dos asteroides se vida zerar
             if (Metricas.lifes == 0) {
                 stop();
             }
-
+             */
             try {
                 Thread.sleep(10);
             } catch (InterruptedException ex) {
@@ -91,13 +87,6 @@ public class ThreadPrincipal extends Thread {
             @Override
             public void run() {
                 while (true) {
-                    // pausa
-                    if (!Metricas.inGame) {
-                        suspend();
-                    } else {
-                        resume();
-                    }
-
                     tiro.movBullet();
 
                     // Funcao para remover o tiro caso ele atinge y = -26
@@ -156,7 +145,8 @@ public class ThreadPrincipal extends Thread {
 
     // Funcao que para a Thread de movimento do asteroide de acordo com o if
     public void paraAst() {
-        stop();
+        // funciona como se tivesse um this na frente do stop;
+        this.stop();
     }
 
     // Funcao de colisao entre Nave e Asteroides
@@ -181,9 +171,23 @@ public class ThreadPrincipal extends Thread {
             nave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Nave2.png")));
         } else if (Metricas.lifes == 1) {
             nave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Nave3.png")));
-        } //else{
-        //nave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Nave3.png")));
-        //}
+        } else if (Metricas.lifes == 0) {
+
+            jPanel.remove(nave);
+            jPanel.validate();
+            jPanel.repaint();
+
+            // aqui seta o booleano inGame como falso para parar o while da Thread que movimenta o asteroide
+            // dessa forma ele não gera dois jOptionPane
+            Metricas.inGame = false;
+
+            // OptionPane
+            Icon figura = new javax.swing.ImageIcon(getClass().getResource("/images/facepalm2.png"));
+            JOptionPane.showMessageDialog(null, "Já morreu fera? Ruimzão hein? affs!\nSó fez " + Metricas.score + " pontos!", "Asteroides", JOptionPane.PLAIN_MESSAGE, figura);
+            // this para parar a thread principal 
+
+            this.stop();
+        }
 
     }
     // final
