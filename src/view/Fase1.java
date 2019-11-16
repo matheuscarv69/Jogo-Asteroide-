@@ -114,7 +114,7 @@ public class Fase1 extends javax.swing.JFrame {
     }
 
     private void gerarTiro() {
-        int a = nave.getX() + 34;
+        int a = nave.getX() + 20;
         int b = nave.getY() - 13;
 
         tiro = new Bullets(a, b);
@@ -131,6 +131,17 @@ public class Fase1 extends javax.swing.JFrame {
             @Override
             public void run() {
                 while (true) {
+                    // Pausa
+                    if (!Metricas.inGame) {
+                        suspend();
+                    }else{
+                        resume();
+                    }
+                    /* retorna a execucao da thread
+                    if (Metricas.inGame == true) {
+                        resume();
+                    }
+                    */
                     Random random = new Random();
                     int low = -30;
                     int hight = 0;
@@ -150,7 +161,7 @@ public class Fase1 extends javax.swing.JFrame {
 
                     // Verifica se a qunatidade de vidas acabou
                     if (Metricas.lifes == 0) {
-
+                        // colocar joptional pane
                         stop();
                     }
 
@@ -173,20 +184,31 @@ public class Fase1 extends javax.swing.JFrame {
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
         // TODO add your handling code here:
-        //andar Esquerda 
+
+        // andar Esquerda 
         if (evt.getKeyChar() == 'a' || evt.getKeyChar() == 'A') {
             nave.andarEsquerda();
             nave.verEsquerda();
 
         }
-        //andar Direita 
+        // andar Direita 
         if (evt.getKeyChar() == 'd' || evt.getKeyChar() == 'D') {
             nave.andarDireita();
             nave.verDireita();
         }
-        //tiro
+        // tiro
         if (evt.getKeyChar() == 'k' || evt.getKeyChar() == 'K') {
             gerarTiro();
+        }
+        // pause
+        if (evt.getKeyChar() == 'p' || evt.getKeyChar() == 'P') {
+            Metricas.inGame = false;
+            thread.stop();
+        }
+        // retorna a execucao da thread
+        if (evt.getKeyChar() == 'o' || evt.getKeyChar() == 'O') {
+            Metricas.inGame = true;
+            thread.resume();
         }
 
 

@@ -41,6 +41,13 @@ public class ThreadPrincipal extends Thread {
     //@Override
     public void run() {
         while (true) {
+            // pausa
+            if (!Metricas.inGame) {
+                suspend();
+            } else {
+                resume();
+            }
+            
             ast.movAst();
 
             // Remove o asteroide ao atingir y = 420
@@ -62,6 +69,8 @@ public class ThreadPrincipal extends Thread {
 
                 stop();
             }
+            // Muda a imagem da nave de acordo com a quantidade de vidas
+            mudaNave();
             // para movimentos dos asteroides se vida zerar
             if (Metricas.lifes == 0) {
                 stop();
@@ -82,6 +91,13 @@ public class ThreadPrincipal extends Thread {
             @Override
             public void run() {
                 while (true) {
+                    // pausa
+                    if (!Metricas.inGame) {
+                        suspend();
+                    } else {
+                        resume();
+                    }
+
                     tiro.movBullet();
 
                     // Funcao para remover o tiro caso ele atinge y = -26
@@ -159,5 +175,16 @@ public class ThreadPrincipal extends Thread {
         return rectTiro.intersects(rectAst);
     }
 
+    // Muda a imagem da nave de acordo com a quantidade de vidas
+    public void mudaNave() {
+        if (Metricas.lifes == 2) {
+            nave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Nave2.png")));
+        } else if (Metricas.lifes == 1) {
+            nave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Nave3.png")));
+        } //else{
+        //nave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Nave3.png")));
+        //}
+
+    }
     // final
 }

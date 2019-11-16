@@ -18,15 +18,14 @@ public class nave extends JLabel {
 
     private static int andar = 25;
 
-    private static int width = 85;
-    private static int height = 72;
+    private static int width = 50;//85
+    private static int height = 62;//79
 
     public nave(int x, int y) {
         this.x = x;
         this.y = y;
         setBounds(x, y, width, height);
-
-        setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Nave.png")));
+        setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Nave1.png")));
     }
 
     public void andarDireita() {

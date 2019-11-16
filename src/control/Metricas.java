@@ -10,6 +10,8 @@ package control;
  * @author mathe
  */
 public class Metricas {
+    // 
+    public static boolean inGame = true;
     // Marcadores
     public static int score = 0;
     public static int lifes = 3;
