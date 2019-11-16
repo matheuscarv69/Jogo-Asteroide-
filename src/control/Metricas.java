@@ -10,9 +10,12 @@ package control;
  * @author mathe
  */
 public class Metricas {
-    
+    // Marcadores
     public static int score = 0;
     public static int lifes = 3;
+    
+    // Dificultadores
+    public static int time = 2300;
     
     
     

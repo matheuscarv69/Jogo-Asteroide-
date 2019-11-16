@@ -41,16 +41,16 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+              <Group type="102" attributes="0">
+                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                   <Component id="jLabelLifes" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jLabelNumLifes" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="460" max="32767" attributes="0"/>
+                  <EmptySpace pref="323" max="32767" attributes="0"/>
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="jLabelNumScore" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="jLabelNumScore" min="-2" pref="63" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -64,7 +64,7 @@
                       <Component id="jLabelLifes" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabelNumLifes" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="392" max="32767" attributes="0"/>
+                  <EmptySpace pref="372" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -72,21 +72,33 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Comic Sans MS" size="24" style="3"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Score: "/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabelNumScore">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Comic Sans MS" size="24" style="3"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="0"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabelLifes">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Comic Sans MS" size="24" style="3"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Lifes:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabelNumLifes">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Comic Sans MS" size="24" style="3"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="3"/>
           </Properties>
         </Component>

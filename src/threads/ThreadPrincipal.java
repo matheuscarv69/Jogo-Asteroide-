@@ -7,6 +7,7 @@ package threads;
 
 import control.Metricas;
 import java.awt.Rectangle;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import model.Asteroides;
@@ -26,6 +27,7 @@ public class ThreadPrincipal extends Thread {
     private JPanel jPanel;
     private JLabel pontos;
     private JLabel vidas;
+    private JLabel explosao;
 
     public ThreadPrincipal(nave nave, Asteroides ast, JPanel jPanel, JLabel pontos, JLabel vidas) {
         this.nave = nave;
@@ -117,7 +119,7 @@ public class ThreadPrincipal extends Thread {
         }.start();
 
     }
-    
+
     // Funcao que remove o tiro caso atinja a posicao y = -26 
     public boolean verLimiteTiro() {
         if (tiro.getY() == -26) {
@@ -126,6 +128,7 @@ public class ThreadPrincipal extends Thread {
             return false;
         }
     }
+
     // Funcao que remove o Asteroide ao atingir a posicao y = 420
     public boolean verLimiteAst() {
         if (ast.getY() > 420) {
@@ -134,7 +137,7 @@ public class ThreadPrincipal extends Thread {
             return false;
         }
     }
-    
+
     // Funcao que para a Thread de movimento do asteroide de acordo com o if
     public void paraAst() {
         stop();

@@ -52,28 +52,32 @@ public class Fase1 extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Comic Sans MS", 3, 24)); // NOI18N
         jLabel1.setText("Score: ");
 
+        jLabelNumScore.setFont(new java.awt.Font("Comic Sans MS", 3, 24)); // NOI18N
         jLabelNumScore.setText("0");
 
+        jLabelLifes.setFont(new java.awt.Font("Comic Sans MS", 3, 24)); // NOI18N
         jLabelLifes.setText("Lifes:");
 
+        jLabelNumLifes.setFont(new java.awt.Font("Comic Sans MS", 3, 24)); // NOI18N
         jLabelNumLifes.setText("3");
 
         javax.swing.GroupLayout jPanelFase1Layout = new javax.swing.GroupLayout(jPanelFase1);
         jPanelFase1.setLayout(jPanelFase1Layout);
         jPanelFase1Layout.setHorizontalGroup(
             jPanelFase1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelFase1Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
+            .addGroup(jPanelFase1Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
                 .addComponent(jLabelLifes)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jLabelNumLifes)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 460, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 323, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabelNumScore)
-                .addGap(55, 55, 55))
+                .addGap(18, 18, 18)
+                .addComponent(jLabelNumScore, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanelFase1Layout.setVerticalGroup(
             jPanelFase1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -84,7 +88,7 @@ public class Fase1 extends javax.swing.JFrame {
                     .addComponent(jLabelNumScore)
                     .addComponent(jLabelLifes)
                     .addComponent(jLabelNumLifes))
-                .addContainerGap(392, Short.MAX_VALUE))
+                .addContainerGap(372, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -143,12 +147,17 @@ public class Fase1 extends javax.swing.JFrame {
 
                     // Verifica se a qunatidade de vidas acabou
                     if (Metricas.lifes == 0) {
-
+                        
                         stop();
                     }
-
+                    
+                    // Aumenta a velocidade de geração dos asteroides
+                    if(Metricas.score > 100){
+                        Metricas.time -=50;
+                    }
+                    System.out.println("time: " + Metricas.time);
                     try {
-                        Thread.sleep(2300);
+                        Thread.sleep(Metricas.time);
                     } catch (InterruptedException ex) {
                         ex.printStackTrace();
                     }
