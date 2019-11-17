@@ -24,7 +24,7 @@ public class Bullets extends JLabel {
         this.y = y;
 
         setBounds(x, y, width, height);
-        setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/projetil1.png")));
+        setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/projetil.png")));
     }
 
     public void movBullet() {

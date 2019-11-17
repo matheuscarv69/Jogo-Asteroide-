@@ -24,9 +24,7 @@ public class Fase1 extends javax.swing.JFrame {
     nave nave;
     Bullets tiro;
     Asteroides ast;
-    
-    
-    
+
     ThreadPrincipal thread;
 
     public Fase1() {
@@ -34,9 +32,6 @@ public class Fase1 extends javax.swing.JFrame {
 
         gerarNave();
         gerarAst();
-        
-        
-
 
     }
 
@@ -129,11 +124,10 @@ public class Fase1 extends javax.swing.JFrame {
 
         tiro = new Bullets(a, b);
         jPanelFase1.add(tiro);
-        
+
         // Fazer testes desses metodos
         //jPanelFase1.validate();
         //jPanelFase1.repaint();
-
         // Funcao de movimentacao do tiro 
         thread.getTiro(tiro);
     }
@@ -142,8 +136,7 @@ public class Fase1 extends javax.swing.JFrame {
         new Thread() {
             @Override
             public void run() {
-                while (true) {
-
+                while (Metricas.inGame) {
                     Random random = new Random();
                     int low = -30;
                     int hight = 0;
@@ -154,9 +147,10 @@ public class Fase1 extends javax.swing.JFrame {
                     int y = random.nextInt(hight - low) + low;
 
                     ast = new Asteroides(x, y);
+
                     jPanelFase1.add(ast);
                     // fazer teste com esses metodos
-                    //jPanelFase1.validate();
+                    // jPanelFase1.validate();
                     //jPanelFase1.repaint();
 
                     // Funcao de movimentacao do asteroide
@@ -164,18 +158,18 @@ public class Fase1 extends javax.swing.JFrame {
 
                     // Aumenta a velocidade de geração dos asteroides
                     if (Metricas.score >= 100) {
-                        Metricas.time -= 100;
+                        Metricas.time -= 20;
                     }
-                    
+
                     // Verifica se a qunatidade de vidas acabou
-                    if (Metricas.lifes == 0){
+                    if (Metricas.lifes == 0) {
                         stop();
                     }
-                    
-                    System.out.println("time: " + Metricas.time);
-                    
+
+                    //System.out.println("time: " + Metricas.time);
                     try {
                         Thread.sleep(Metricas.time);
+
                     } catch (InterruptedException ex) {
                         ex.printStackTrace();
                     }

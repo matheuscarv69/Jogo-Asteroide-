@@ -27,7 +27,9 @@ public class ThreadPrincipal extends Thread {
     private JPanel jPanel;
     private JLabel pontos;
     private JLabel vidas;
-    private JLabel explosao;
+
+    private static Rectangle rectAstD;
+    private static Rectangle rectTiroD = new Rectangle(0, 0, 0, 0);
 
     public ThreadPrincipal(nave nave, Asteroides ast, JPanel jPanel, JLabel pontos, JLabel vidas) {
         this.nave = nave;
@@ -35,20 +37,19 @@ public class ThreadPrincipal extends Thread {
         this.jPanel = jPanel;
         this.pontos = pontos;
         this.vidas = vidas;
+        this.tiro = new Bullets(nave.getX() + 20, nave.getY() - 13);
         start();
     }
 
-    //@Override
+    @Override
     public void run() {
         // aqui o booleano inGame está dentro do while para parar de executar quando for setado com false
         // dessa forma ele não gera dois jOptionPane
         while (Metricas.inGame) {
             ast.movAst();
-
             // Remove o asteroide ao atingir y = 420
             if (verLimiteAst()) {
                 jPanel.remove(ast);
-                // colocar outro metodos de jpanel
                 stop();
             }
 
@@ -57,17 +58,32 @@ public class ThreadPrincipal extends Thread {
                 jPanel.remove(ast);
                 jPanel.validate();
                 jPanel.repaint();
-
                 // contagem de vidas
                 Metricas.lifes--;
                 vidas.setText(String.valueOf(Metricas.lifes));
+                stop();
+            }
+
+            rectAstD = new Rectangle(ast.getBounds());
+            //rectTiroD = new Rectangle(tiro.getBounds());
+            //System.out.println("rectAst - " + rectAstD.getBounds());
+            //System.out.println("rectTiro - " + rectTiroD.getBounds());
+
+            if (rectTiroD.intersects(rectAstD)) {
+                System.out.println("funcionou");
+                jPanel.remove(ast);
+                jPanel.validate();
+                jPanel.repaint();
+                Metricas.score += 10;
+                pontos.setText(String.valueOf(Metricas.score));
 
                 stop();
             }
+
             // Muda a imagem da nave de acordo com a quantidade de vidas
             mudaNave();
 
-            /* para movimentos dos asteroides se vida zerar
+            /*para movimentos dos asteroides se vida zerar
             if (Metricas.lifes == 0) {
                 stop();
             }
@@ -86,7 +102,7 @@ public class ThreadPrincipal extends Thread {
         new Thread() {
             @Override
             public void run() {
-                while (true) {
+                while (Metricas.inGame) {
                     tiro.movBullet();
 
                     // Funcao para remover o tiro caso ele atinge y = -26
@@ -102,15 +118,13 @@ public class ThreadPrincipal extends Thread {
                         jPanel.remove(tiro);
                         jPanel.validate();
                         jPanel.repaint();
-
-                        // Funcao que para a movimentacao do Asteroide
+                        // Funcao que para a movimentacao do Asteroide thread principal
                         paraAst();
-
                         // contagem de pontos ao Tiro atingir Asteroide
                         Metricas.score += 10;
                         pontos.setText(String.valueOf(Metricas.score));
+                        //System.out.println("padrao");
                         stop();
-
                     }
 
                     try {
@@ -127,23 +141,15 @@ public class ThreadPrincipal extends Thread {
 
     // Funcao que remove o tiro caso atinja a posicao y = -26 
     public boolean verLimiteTiro() {
-        if (tiro.getY() == -26) {
-            return true;
-        } else {
-            return false;
-        }
+        return tiro.getY() == -26;
     }
 
     // Funcao que remove o Asteroide ao atingir a posicao y = 420
     public boolean verLimiteAst() {
-        if (ast.getY() > 420) {
-            return true;
-        } else {
-            return false;
-        }
+        return ast.getY() > 420;
     }
 
-    // Funcao que para a Thread de movimento do asteroide de acordo com o if
+    // Funcao que para a Thread Principal de movimento do asteroide de acordo com o if
     public void paraAst() {
         // funciona como se tivesse um this na frente do stop;
         this.stop();
@@ -153,7 +159,10 @@ public class ThreadPrincipal extends Thread {
     public boolean colisaoNavAst() {
         Rectangle rectNave = new Rectangle(nave.getBounds());
         Rectangle rectAst = new Rectangle(ast.getBounds());
+        //teste = new Rectangle(ast.getBounds());
 
+        //rectAstD = new Rectangle(rectAst);
+        //rectAstD = new Rectangle(ast.getBounds());
         return rectAst.intersects(rectNave);
     }
 
@@ -161,18 +170,20 @@ public class ThreadPrincipal extends Thread {
     public boolean colisaoTiroAst() {
         Rectangle rectTiro = new Rectangle(tiro.getBounds());
         Rectangle rectAst = new Rectangle(ast.getBounds());
+        //testeT = new Rectangle(tiro.getBounds());
 
+        //rectTiroD = new Rectangle(rectTiro);
+        rectTiroD = new Rectangle(tiro.getBounds());
         return rectTiro.intersects(rectAst);
     }
 
     // Muda a imagem da nave de acordo com a quantidade de vidas
-    public void mudaNave() {
+    public synchronized void mudaNave() {
         if (Metricas.lifes == 2) {
             nave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Nave2.png")));
         } else if (Metricas.lifes == 1) {
             nave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Nave3.png")));
         } else if (Metricas.lifes == 0) {
-
             jPanel.remove(nave);
             jPanel.validate();
             jPanel.repaint();
@@ -181,11 +192,10 @@ public class ThreadPrincipal extends Thread {
             // dessa forma ele não gera dois jOptionPane
             Metricas.inGame = false;
 
-            // OptionPane
+            // OptionPane ao zerar a vida
             Icon figura = new javax.swing.ImageIcon(getClass().getResource("/images/facepalm2.png"));
-            JOptionPane.showMessageDialog(null, "Já morreu fera? Ruimzão hein? affs!\nSó fez " + Metricas.score + " pontos!", "Asteroides", JOptionPane.PLAIN_MESSAGE, figura);
+            JOptionPane.showMessageDialog(null, "Já morreu fera? Ruimzão hein? affs!\nSó fez " + Metricas.score + " pontos!", "Game-Over", JOptionPane.PLAIN_MESSAGE, figura);
             // this para parar a thread principal 
-
             this.stop();
         }
 
