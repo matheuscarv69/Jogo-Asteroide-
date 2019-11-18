@@ -149,7 +149,7 @@ public class Fase1 extends javax.swing.JFrame {
         jPanelFase1.add(nave);
     }
 
-    private void gerarTiro() {
+    private synchronized void gerarTiro() {
         int a = nave.getX() + 20;
         int b = nave.getY() - 13;
 

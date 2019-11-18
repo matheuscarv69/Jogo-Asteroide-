@@ -39,6 +39,7 @@ public class Menu extends javax.swing.JFrame {
         jLabelTituloJogo = new javax.swing.JLabel();
         jLabelNave1 = new javax.swing.JLabel();
         jLabelNave2 = new javax.swing.JLabel();
+        jLabelDesenvolvedor = new javax.swing.JLabel();
         jLabelEscNave1 = new javax.swing.JLabel();
         jLabelEscNave2 = new javax.swing.JLabel();
 
@@ -69,6 +70,10 @@ public class Menu extends javax.swing.JFrame {
 
         jLabelNave2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/MenuNave2.png"))); // NOI18N
 
+        jLabelDesenvolvedor.setFont(new java.awt.Font("Comic Sans MS", 3, 12)); // NOI18N
+        jLabelDesenvolvedor.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelDesenvolvedor.setText("Developed by Matheus Carvalho");
+
         javax.swing.GroupLayout jPanelMenuLayout = new javax.swing.GroupLayout(jPanelMenu);
         jPanelMenu.setLayout(jPanelMenuLayout);
         jPanelMenuLayout.setHorizontalGroup(
@@ -76,30 +81,34 @@ public class Menu extends javax.swing.JFrame {
             .addGroup(jPanelMenuLayout.createSequentialGroup()
                 .addGap(47, 47, 47)
                 .addComponent(jLabelNave1)
-                .addGap(56, 56, 56)
+                .addGap(52, 52, 52)
                 .addComponent(jButtonMenuIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                 .addComponent(jLabelNave2)
                 .addGap(47, 47, 47))
             .addGroup(jPanelMenuLayout.createSequentialGroup()
-                .addGap(226, 226, 226)
-                .addComponent(jLabelTituloJogo)
+                .addGap(216, 216, 216)
+                .addGroup(jPanelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelDesenvolvedor)
+                    .addGroup(jPanelMenuLayout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addComponent(jLabelTituloJogo)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelMenuLayout.setVerticalGroup(
             jPanelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelMenuLayout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addComponent(jLabelTituloJogo)
-                .addGap(146, 146, 146)
-                .addComponent(jButtonMenuIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelMenuLayout.createSequentialGroup()
-                .addContainerGap(221, Short.MAX_VALUE)
-                .addGroup(jPanelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabelNave2)
-                    .addComponent(jLabelNave1))
-                .addGap(36, 36, 36))
+                .addGap(40, 40, 40)
+                .addComponent(jLabelTituloJogo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 147, Short.MAX_VALUE)
+                .addGroup(jPanelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButtonMenuIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jLabelNave2)
+                        .addComponent(jLabelNave1)))
+                .addGap(7, 7, 7)
+                .addComponent(jLabelDesenvolvedor)
+                .addContainerGap())
         );
 
         jLabelEscNave1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/MenuNave3.png"))); // NOI18N
@@ -244,6 +253,7 @@ public class Menu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonMenuIniciar;
+    private javax.swing.JLabel jLabelDesenvolvedor;
     private javax.swing.JLabel jLabelEscNave1;
     private javax.swing.JLabel jLabelEscNave2;
     private javax.swing.JLabel jLabelNave1;
