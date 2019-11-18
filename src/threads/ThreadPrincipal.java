@@ -202,7 +202,7 @@ public class ThreadPrincipal extends Thread {
                 // dessa forma ele não gera dois jOptionPane
                 Metricas.inGame = false;
                 // OptionPane ao zerar a vida
-                geraJoptionPane();
+                //geraJoptionPane();
                 // this para parar a thread principal 
                 this.stop();
             }
