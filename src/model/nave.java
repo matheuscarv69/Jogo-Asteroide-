@@ -5,6 +5,7 @@
  */
 package model;
 
+import control.Metricas;
 import javax.swing.JLabel;
 
 /**
@@ -25,7 +26,11 @@ public class nave extends JLabel {
         this.x = x;
         this.y = y;
         setBounds(x, y, width, height);
-        setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Nave1.png")));
+        if (Metricas.escNave == 1) {
+            setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/naves/Nave1.png")));
+        } else {
+            setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/naves/Nave2.png")));
+        }
     }
 
     public void andarDireita() {
@@ -40,7 +45,7 @@ public class nave extends JLabel {
         x = getX();
         y = getY();
         x -= andar;
-        
+
         setBounds(x, y, width, height);
     }
 

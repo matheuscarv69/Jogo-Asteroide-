@@ -5,8 +5,11 @@
  */
 package view;
 
+import com.sun.media.jfxmedia.AudioClip;
 import control.Metricas;
 import java.util.Random;
+import javax.swing.Icon;
+import javax.swing.JOptionPane;
 import model.Asteroides;
 import model.Bullets;
 import model.nave;
@@ -44,6 +47,7 @@ public class Fase1 extends javax.swing.JFrame {
         jLabelNumScore = new javax.swing.JLabel();
         jLabelLifes = new javax.swing.JLabel();
         jLabelNumLifes = new javax.swing.JLabel();
+        jLabelSpeedFase = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Asteroids");
@@ -62,6 +66,7 @@ public class Fase1 extends javax.swing.JFrame {
 
         jLabelNumScore.setFont(new java.awt.Font("Comic Sans MS", 3, 24)); // NOI18N
         jLabelNumScore.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelNumScore.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelNumScore.setText("0");
 
         jLabelLifes.setFont(new java.awt.Font("Comic Sans MS", 3, 24)); // NOI18N
@@ -70,22 +75,30 @@ public class Fase1 extends javax.swing.JFrame {
 
         jLabelNumLifes.setFont(new java.awt.Font("Comic Sans MS", 3, 24)); // NOI18N
         jLabelNumLifes.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelNumLifes.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabelNumLifes.setText("3");
+
+        jLabelSpeedFase.setFont(new java.awt.Font("Comic Sans MS", 3, 24)); // NOI18N
+        jLabelSpeedFase.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelSpeedFase.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelSpeedFase.setText("Nível 1");
 
         javax.swing.GroupLayout jPanelFase1Layout = new javax.swing.GroupLayout(jPanelFase1);
         jPanelFase1.setLayout(jPanelFase1Layout);
         jPanelFase1Layout.setHorizontalGroup(
             jPanelFase1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelFase1Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addGap(25, 25, 25)
                 .addComponent(jLabelLifes)
                 .addGap(18, 18, 18)
                 .addComponent(jLabelNumLifes)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 323, Short.MAX_VALUE)
+                .addGap(112, 112, 112)
+                .addComponent(jLabelSpeedFase, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jLabelNumScore, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabelNumScore, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25))
         );
         jPanelFase1Layout.setVerticalGroup(
             jPanelFase1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -95,7 +108,8 @@ public class Fase1 extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(jLabelNumScore)
                     .addComponent(jLabelLifes)
-                    .addComponent(jLabelNumLifes))
+                    .addComponent(jLabelNumLifes)
+                    .addComponent(jLabelSpeedFase))
                 .addContainerGap(372, Short.MAX_VALUE))
         );
 
@@ -150,17 +164,21 @@ public class Fase1 extends javax.swing.JFrame {
 
                     jPanelFase1.add(ast);
                     // fazer teste com esses metodos
-                    // jPanelFase1.validate();
-                    //jPanelFase1.repaint();
+                    jPanelFase1.validate();
+                    jPanelFase1.repaint();
 
                     // Funcao de movimentacao do asteroide
-                    thread = new ThreadPrincipal(nave, ast, jPanelFase1, jLabelNumScore, jLabelNumLifes);
+                    thread = new ThreadPrincipal(nave, ast, jPanelFase1, jLabelNumScore, jLabelNumLifes, jLabelSpeedFase);
 
                     // Aumenta a velocidade de geração dos asteroides
-                    if (Metricas.score >= 100) {
-                        Metricas.time -= 20;
+                    niveis();
+                    
+                    /*
+                    if (Metricas.time == 1200) {
+                        geraJoptionPane();
+                        stop();
                     }
-
+                    */
                     // Verifica se a qunatidade de vidas acabou
                     if (Metricas.lifes == 0) {
                         stop();
@@ -169,17 +187,45 @@ public class Fase1 extends javax.swing.JFrame {
                     //System.out.println("time: " + Metricas.time);
                     try {
                         Thread.sleep(Metricas.time);
-
                     } catch (InterruptedException ex) {
                         ex.printStackTrace();
                     }
-
                     jPanelFase1.updateUI();
                 }
-
             }
-
         }.start();
+    }
+
+    public synchronized void niveis() {
+        if (Metricas.score >= 70 && Metricas.score <= 150) {
+            Metricas.time -= 30;
+            System.out.println("time: " + Metricas.time);
+            jLabelSpeedFase.setText("Nível 2");
+        } else if (Metricas.score >= 300 && Metricas.score <= 450) {
+            Metricas.time -= 60;
+            //jLabelSpeedFase.setText(String.valueOf(Metricas.time));
+            System.out.println("time: " + Metricas.time);
+            jLabelSpeedFase.setText("Nível 3");
+        } else if (Metricas.score >= 500 && Metricas.score <= 600) {
+            Metricas.time -= 80;
+            //jLabelSpeedFase.setText(String.valueOf(Metricas.time));
+            System.out.println("time: " + Metricas.time);
+            jLabelSpeedFase.setText("Nível 3");
+        } else if (Metricas.score >= 670 && Metricas.score <= 750) {
+            Metricas.time -= 10;
+            System.out.println("time: " + Metricas.time);
+            jLabelSpeedFase.setText("Nível 4");
+        } else if (Metricas.score >= 800) {
+            Metricas.time = 1200;
+            System.out.println("time: " + Metricas.time);
+            // Pensar numa forma de encerrar fase
+            jLabelSpeedFase.setText("Escapou");
+        }
+    }
+
+    public void geraJoptionPane() {
+        Icon figura = new javax.swing.ImageIcon(getClass().getResource("/images/facepalm2.png"));
+        JOptionPane.showMessageDialog(null, "Parabéns! Você terminou o beta, sua pontuação foi: " + Metricas.score, "Acabou :(", JOptionPane.PLAIN_MESSAGE, figura);
 
     }
 
@@ -263,6 +309,7 @@ public class Fase1 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelLifes;
     private javax.swing.JLabel jLabelNumLifes;
     private javax.swing.JLabel jLabelNumScore;
+    private javax.swing.JLabel jLabelSpeedFase;
     private javax.swing.JPanel jPanelFase1;
     // End of variables declaration//GEN-END:variables
 

@@ -10,13 +10,16 @@ package control;
  * @author mathe
  */
 public class Metricas {
-    // 
+    // Gerenciadores do jogo
     public static boolean inGame = true;
+    public static int escNave = 0;
+    
     // Marcadores
     public static int score = 0;
     public static int lifes = 3;
     
     // Dificultadores
-    public static int time = 2300;   
+    // 2300
+    public static int time = 2500;   
     
 }
