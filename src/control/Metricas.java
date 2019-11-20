@@ -19,7 +19,7 @@ public class Metricas {
     public static int lifes = 3;
     
     // Dificultadores
-    // 2300
-    public static int time = 2500;   
+    
+    public static int time = 2250;   
     
 }

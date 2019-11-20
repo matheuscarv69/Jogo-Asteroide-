@@ -28,6 +28,7 @@ public class Fase1 extends javax.swing.JFrame {
     Asteroides ast;
 
     ThreadPrincipal thread;
+
     private JButton jButtonSim;
     private JButton jButtonNao;
 
@@ -149,16 +150,13 @@ public class Fase1 extends javax.swing.JFrame {
         jPanelFase1.add(nave);
     }
 
-    private synchronized void gerarTiro() {
+    private void gerarTiro() {
         int a = nave.getX() + 20;
         int b = nave.getY() - 13;
 
         tiro = new Bullets(a, b);
         jPanelFase1.add(tiro);
 
-        // Fazer testes desses metodos
-        //jPanelFase1.validate();
-        //jPanelFase1.repaint();
         // Funcao de movimentacao do tiro 
         thread.getTiro(tiro);
     }
@@ -180,7 +178,7 @@ public class Fase1 extends javax.swing.JFrame {
                     ast = new Asteroides(x, y);
 
                     jPanelFase1.add(ast);
-                    // fazer teste com esses metodos
+
                     jPanelFase1.validate();
                     jPanelFase1.repaint();
 
@@ -219,12 +217,12 @@ public class Fase1 extends javax.swing.JFrame {
     public synchronized void niveis() {
         if (Metricas.score >= 70 && Metricas.score <= 150) {
             //Metricas.time -= 30;
-            Metricas.time = 2300;
+            Metricas.time = 2150;
             System.out.println("time: " + Metricas.time);
             jLabelNivel.setText("Nível 2");
         } else if (Metricas.score >= 300 && Metricas.score <= 450) {
             // Metricas.time -= 60;
-            Metricas.time = 2100;
+            Metricas.time = 1900;
             System.out.println("time: " + Metricas.time);
             jLabelNivel.setText("Nível 3");
         } else if (Metricas.score >= 500 && Metricas.score <= 600) {
@@ -239,7 +237,6 @@ public class Fase1 extends javax.swing.JFrame {
         } else if (Metricas.score >= 800) {
             Metricas.time = 1300;
             System.out.println("time: " + Metricas.time);
-            // Pensar numa forma de encerrar fase
             jLabelNivel.setText("Nível 5");
         }
     }
@@ -247,6 +244,7 @@ public class Fase1 extends javax.swing.JFrame {
     public void telaFim() {
         Metricas.inGame = false;
         thread.stop();
+
         criaButtonSim();
         criaButtonNao();
         jPanelFase1.add(jButtonSim);
@@ -254,6 +252,8 @@ public class Fase1 extends javax.swing.JFrame {
 
         jPanelFase1.remove(nave);
         jPanelFase1.remove(ast);
+        jPanelFase1.remove(tiro);
+
         jLabelLifes.setVisible(false);
         jLabelScore.setVisible(false);
         jLabelNivel.setVisible(false);
@@ -355,7 +355,6 @@ public class Fase1 extends javax.swing.JFrame {
                 jButtonSimActionPerformed(evt);
             }
         });
-
     }
 
     private void criaButtonNao() {
@@ -370,7 +369,6 @@ public class Fase1 extends javax.swing.JFrame {
                 jButtonNaoActionPerformed(evt);
             }
         });
-
     }
 
     private void jButtonSimActionPerformed(java.awt.event.ActionEvent evt) {
@@ -378,7 +376,7 @@ public class Fase1 extends javax.swing.JFrame {
         Metricas.inGame = true;
         Metricas.score = 0;
         Metricas.lifes = 3;
-        Metricas.time = 2500;
+        Metricas.time = 2250;
         dispose();
 
         JFrame Menu = new Menu();
