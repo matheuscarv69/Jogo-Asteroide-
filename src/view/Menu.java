@@ -18,11 +18,8 @@ public class Menu extends javax.swing.JFrame {
      * Creates new form Menu
      */
     public Menu() {
-        initComponents();
+        initComponents();      
         
-        
-        //jLabelEscNave1.setLocation(0,0);
-        //jLabelEscNave2.setVisible(false);
     }
 
     /**
@@ -36,12 +33,17 @@ public class Menu extends javax.swing.JFrame {
 
         jPanelMenu = new javax.swing.JPanel();
         jButtonMenuIniciar = new javax.swing.JButton();
-        jLabelTituloJogo = new javax.swing.JLabel();
         jLabelNave1 = new javax.swing.JLabel();
         jLabelNave2 = new javax.swing.JLabel();
         jLabelDesenvolvedor = new javax.swing.JLabel();
+        jLabelTituloJogo = new javax.swing.JLabel();
         jLabelEscNave1 = new javax.swing.JLabel();
         jLabelEscNave2 = new javax.swing.JLabel();
+        jLabelMovTiro = new javax.swing.JLabel();
+        jLabelMov = new javax.swing.JLabel();
+        jLabelTecA = new javax.swing.JLabel();
+        jLabelTecD = new javax.swing.JLabel();
+        jLabelTecK = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Asteroids Menu");
@@ -62,10 +64,6 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        jLabelTituloJogo.setFont(new java.awt.Font("Comic Sans MS", 3, 24)); // NOI18N
-        jLabelTituloJogo.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelTituloJogo.setText("ASTEROIDES");
-
         jLabelNave1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/MenuNave3.png"))); // NOI18N
 
         jLabelNave2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/MenuNave2.png"))); // NOI18N
@@ -74,33 +72,37 @@ public class Menu extends javax.swing.JFrame {
         jLabelDesenvolvedor.setForeground(new java.awt.Color(255, 255, 255));
         jLabelDesenvolvedor.setText("Developed by Matheus Carvalho");
 
+        jLabelTituloJogo.setFont(new java.awt.Font("Comic Sans MS", 3, 24)); // NOI18N
+        jLabelTituloJogo.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelTituloJogo.setText("ASTEROIDES");
+
         javax.swing.GroupLayout jPanelMenuLayout = new javax.swing.GroupLayout(jPanelMenu);
         jPanelMenu.setLayout(jPanelMenuLayout);
         jPanelMenuLayout.setHorizontalGroup(
             jPanelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelMenuLayout.createSequentialGroup()
                 .addGap(47, 47, 47)
-                .addComponent(jLabelNave1)
-                .addGap(52, 52, 52)
-                .addComponent(jButtonMenuIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
-                .addComponent(jLabelNave2)
-                .addGap(47, 47, 47))
-            .addGroup(jPanelMenuLayout.createSequentialGroup()
-                .addGap(216, 216, 216)
                 .addGroup(jPanelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelDesenvolvedor)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelMenuLayout.createSequentialGroup()
+                        .addComponent(jLabelNave1)
+                        .addGap(52, 52, 52)
+                        .addComponent(jButtonMenuIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                        .addComponent(jLabelNave2)
+                        .addGap(47, 47, 47))
                     .addGroup(jPanelMenuLayout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addComponent(jLabelTituloJogo)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(178, 178, 178)
+                        .addGroup(jPanelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelTituloJogo)
+                            .addComponent(jLabelDesenvolvedor))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanelMenuLayout.setVerticalGroup(
             jPanelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelMenuLayout.createSequentialGroup()
-                .addGap(40, 40, 40)
+                .addGap(49, 49, 49)
                 .addComponent(jLabelTituloJogo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 147, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 138, Short.MAX_VALUE)
                 .addGroup(jPanelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButtonMenuIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -125,11 +127,26 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
+        jLabelMovTiro.setFont(new java.awt.Font("Comic Sans MS", 3, 24)); // NOI18N
+        jLabelMovTiro.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelMovTiro.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelMovTiro.setText("Tiro");
+
+        jLabelMov.setFont(new java.awt.Font("Comic Sans MS", 3, 24)); // NOI18N
+        jLabelMov.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelMov.setText("Movimentos");
+
+        jLabelTecA.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/teclas/aR.png"))); // NOI18N
+
+        jLabelTecD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/teclas/dR.png"))); // NOI18N
+
+        jLabelTecK.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/teclas/kR.png"))); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanelMenu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -140,10 +157,28 @@ public class Menu extends javax.swing.JFrame {
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(jLabelEscNave2)
                     .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(57, 57, 57)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabelTecA)
+                            .addGap(34, 34, 34)
+                            .addComponent(jLabelTecD))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(19, 19, 19)
+                            .addComponent(jLabelMov)))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(jLabelTecK)
+                            .addGap(14, 14, 14))
+                        .addComponent(jLabelMovTiro, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGap(57, 57, 57)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanelMenu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -154,6 +189,18 @@ public class Menu extends javax.swing.JFrame {
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(jLabelEscNave2)
                     .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(147, 147, 147)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabelMov, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jLabelMovTiro, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addGap(18, 18, 18)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabelTecK, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jLabelTecA, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jLabelTecD, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addContainerGap(148, Short.MAX_VALUE)))
         );
 
         pack();
@@ -163,6 +210,7 @@ public class Menu extends javax.swing.JFrame {
     private void jButtonMenuIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMenuIniciarActionPerformed
         // TODO add your handling code here:
        
+        tutorialV();
         jPanelMenu.remove(jButtonMenuIniciar);
         jLabelTituloJogo.setText("Escolha sua Nave!");
         
@@ -170,25 +218,24 @@ public class Menu extends javax.swing.JFrame {
         jLabelEscNave1.setLocation(jLabelNave1.getX(), jLabelNave1.getY());
         jPanelMenu.remove(jLabelNave1);
         jPanelMenu.add(jLabelEscNave1);
-               
+
         jLabelEscNave2.setVisible(true);
         jLabelEscNave2.setLocation(jLabelNave2.getX(), jLabelNave2.getY());
         jPanelMenu.remove(jLabelNave2);
         jPanelMenu.add(jLabelEscNave2);
-                
+
         jButtonMenuIniciar.setVisible(false);
         
-/*
-        telaEscNave();
-        telaFase1();
-*/
+        
+        jPanelMenu.validate();
+        jPanelMenu.repaint();
+       
     }//GEN-LAST:event_jButtonMenuIniciarActionPerformed
 
     private void jLabelEscNave1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEscNave1MouseClicked
         // TODO add your handling code here:
         System.out.println("Nave 1 escolhida");
         Metricas.escNave = 1;
-        
         telaFase1();
     }//GEN-LAST:event_jLabelEscNave1MouseClicked
 
@@ -196,10 +243,9 @@ public class Menu extends javax.swing.JFrame {
         // TODO add your handling code here:
         System.out.println("Nave 2 escolhida");
         Metricas.escNave = 2;
-        
         telaFase1();
     }//GEN-LAST:event_jLabelEscNave2MouseClicked
-    
+
     public void telaEscNave() {
         JFrame escNave = new EscNave();
         escNave.setLocationRelativeTo(null);
@@ -207,13 +253,34 @@ public class Menu extends javax.swing.JFrame {
         // fecha o menu
         dispose();
     }
-    
+
     public void telaFase1() {
         JFrame fase1 = new Fase1();
         fase1.setLocationRelativeTo(null);
         fase1.setVisible(true);
         // fecha o menu
         dispose();
+    }
+    public void tutorialV() {
+        jLabelMov.setVisible(true);
+        jLabelMov.setLocation(50,90);
+        jPanelMenu.add(jLabelMov);
+        
+        jLabelMovTiro.setVisible(true);
+        jLabelMovTiro.setLocation(450,90);
+        jPanelMenu.add(jLabelMovTiro);
+        
+        jLabelTecA.setVisible(true);
+        jLabelTecA.setLocation(35,130);
+        jPanelMenu.add(jLabelTecA);
+               
+        jLabelTecD.setVisible(true);
+        jLabelTecD.setLocation(130, 130);
+        jPanelMenu.add(jLabelTecD);
+        
+        jLabelTecK.setVisible(true);
+        jLabelTecK.setLocation(467,130);
+        jPanelMenu.add(jLabelTecK);
     }
 
     /**
@@ -256,8 +323,13 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelDesenvolvedor;
     private javax.swing.JLabel jLabelEscNave1;
     private javax.swing.JLabel jLabelEscNave2;
+    private javax.swing.JLabel jLabelMov;
+    private javax.swing.JLabel jLabelMovTiro;
     private javax.swing.JLabel jLabelNave1;
     private javax.swing.JLabel jLabelNave2;
+    private javax.swing.JLabel jLabelTecA;
+    private javax.swing.JLabel jLabelTecD;
+    private javax.swing.JLabel jLabelTecK;
     private javax.swing.JLabel jLabelTituloJogo;
     private javax.swing.JPanel jPanelMenu;
     // End of variables declaration//GEN-END:variables

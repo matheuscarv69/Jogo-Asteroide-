@@ -7,13 +7,11 @@ package threads;
 
 import control.Metricas;
 import java.awt.Rectangle;
-import javax.swing.Icon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import model.Asteroides;
 import model.Bullets;
 import model.nave;
-import javax.swing.JOptionPane;
 
 /**
  *

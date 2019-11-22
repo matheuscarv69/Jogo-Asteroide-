@@ -37,6 +37,7 @@ public class Fase1 extends javax.swing.JFrame {
 
         gerarNave();
         gerarAst();
+
     }
 
     @SuppressWarnings("unchecked")
@@ -151,6 +152,7 @@ public class Fase1 extends javax.swing.JFrame {
     }
 
     private void gerarTiro() {
+        
         int a = nave.getX() + 20;
         int b = nave.getY() - 13;
 
@@ -159,6 +161,7 @@ public class Fase1 extends javax.swing.JFrame {
 
         // Funcao de movimentacao do tiro 
         thread.getTiro(tiro);
+
     }
 
     private void gerarAst() {
@@ -341,6 +344,7 @@ public class Fase1 extends javax.swing.JFrame {
                 new Fase1().setVisible(true);
             }
         });
+
     }
 
     private void criaButtonSim() {
@@ -388,6 +392,7 @@ public class Fase1 extends javax.swing.JFrame {
         // TODO add your handling code here:
         dispose();
     }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabelFim;
