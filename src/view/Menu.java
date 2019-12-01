@@ -7,6 +7,7 @@ package view;
 
 import control.Metricas;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 /**
  *
@@ -17,8 +18,22 @@ public class Menu extends javax.swing.JFrame {
     /**
      * Creates new form Menu
      */
+    JLabel teclaA;
+    JLabel teclaD;
+    JLabel teclaK;
+    JLabel tutMovimentos;
+    JLabel tutTiro;
+    
+    JLabel naveVermelha;
+    JLabel naveAzul;
+    
+    JLabel naveVerMenu;
+    JLabel naveAzulMenu;
+    
     public Menu() {
         initComponents();
+        navesMenu();
+        System.out.println("bounds - " + jLabelDesenvolvedor.getBounds());
     }
 
     /**
@@ -32,17 +47,8 @@ public class Menu extends javax.swing.JFrame {
 
         jPanelMenu = new javax.swing.JPanel();
         jButtonMenuIniciar = new javax.swing.JButton();
-        jLabelNave1 = new javax.swing.JLabel();
-        jLabelNave2 = new javax.swing.JLabel();
         jLabelDesenvolvedor = new javax.swing.JLabel();
         jLabelTituloJogo = new javax.swing.JLabel();
-        jLabelEscNave1 = new javax.swing.JLabel();
-        jLabelEscNave2 = new javax.swing.JLabel();
-        jLabelMovTiro = new javax.swing.JLabel();
-        jLabelMov = new javax.swing.JLabel();
-        jLabelTecA = new javax.swing.JLabel();
-        jLabelTecD = new javax.swing.JLabel();
-        jLabelTecK = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Asteroids Menu");
@@ -63,16 +69,13 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        jLabelNave1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/MenuNave3.png"))); // NOI18N
-
-        jLabelNave2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/MenuNave2.png"))); // NOI18N
-
         jLabelDesenvolvedor.setFont(new java.awt.Font("Comic Sans MS", 3, 12)); // NOI18N
         jLabelDesenvolvedor.setForeground(new java.awt.Color(255, 255, 255));
         jLabelDesenvolvedor.setText("Developed by Matheus Carvalho");
 
         jLabelTituloJogo.setFont(new java.awt.Font("Comic Sans MS", 3, 24)); // NOI18N
         jLabelTituloJogo.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelTituloJogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelTituloJogo.setText("ASTEROIDES");
 
         javax.swing.GroupLayout jPanelMenuLayout = new javax.swing.GroupLayout(jPanelMenu);
@@ -80,126 +83,40 @@ public class Menu extends javax.swing.JFrame {
         jPanelMenuLayout.setHorizontalGroup(
             jPanelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelMenuLayout.createSequentialGroup()
-                .addGap(47, 47, 47)
+                .addGap(225, 225, 225)
+                .addComponent(jLabelDesenvolvedor)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelMenuLayout.createSequentialGroup()
+                .addContainerGap(174, Short.MAX_VALUE)
                 .addGroup(jPanelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelMenuLayout.createSequentialGroup()
-                        .addComponent(jLabelNave1)
-                        .addGap(52, 52, 52)
                         .addComponent(jButtonMenuIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
-                        .addComponent(jLabelNave2)
-                        .addGap(47, 47, 47))
-                    .addGroup(jPanelMenuLayout.createSequentialGroup()
-                        .addGap(178, 178, 178)
-                        .addGroup(jPanelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelTituloJogo)
-                            .addComponent(jLabelDesenvolvedor))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(254, 254, 254))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelMenuLayout.createSequentialGroup()
+                        .addComponent(jLabelTituloJogo, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(162, 162, 162))))
         );
         jPanelMenuLayout.setVerticalGroup(
             jPanelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelMenuLayout.createSequentialGroup()
-                .addGap(49, 49, 49)
+                .addGap(35, 35, 35)
                 .addComponent(jLabelTituloJogo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 138, Short.MAX_VALUE)
-                .addGroup(jPanelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonMenuIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabelNave2)
-                        .addComponent(jLabelNave1)))
-                .addGap(7, 7, 7)
+                .addGap(122, 122, 122)
+                .addComponent(jButtonMenuIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 174, Short.MAX_VALUE)
                 .addComponent(jLabelDesenvolvedor)
                 .addContainerGap())
         );
-
-        jLabelEscNave1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/MenuNave3.png"))); // NOI18N
-        jLabelEscNave1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelEscNave1MouseClicked(evt);
-            }
-        });
-
-        jLabelEscNave2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/MenuNave2.png"))); // NOI18N
-        jLabelEscNave2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelEscNave2MouseClicked(evt);
-            }
-        });
-
-        jLabelMovTiro.setFont(new java.awt.Font("Comic Sans MS", 3, 24)); // NOI18N
-        jLabelMovTiro.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelMovTiro.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelMovTiro.setText("Tiro");
-
-        jLabelMov.setFont(new java.awt.Font("Comic Sans MS", 3, 24)); // NOI18N
-        jLabelMov.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelMov.setText("Movimentos");
-
-        jLabelTecA.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/teclas/aR.png"))); // NOI18N
-
-        jLabelTecD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/teclas/dR.png"))); // NOI18N
-
-        jLabelTecK.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/teclas/kR.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanelMenu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jLabelEscNave1)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jLabelEscNave2)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(57, 57, 57)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabelTecA)
-                            .addGap(34, 34, 34)
-                            .addComponent(jLabelTecD))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(19, 19, 19)
-                            .addComponent(jLabelMov)))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(jLabelTecK)
-                            .addGap(14, 14, 14))
-                        .addComponent(jLabelMovTiro, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(57, 57, 57)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanelMenu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jLabelEscNave1)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jLabelEscNave2)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(147, 147, 147)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabelMov, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabelMovTiro, javax.swing.GroupLayout.Alignment.TRAILING))
-                    .addGap(18, 18, 18)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabelTecK, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabelTecA, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabelTecD, javax.swing.GroupLayout.Alignment.TRAILING))
-                    .addContainerGap(148, Short.MAX_VALUE)))
         );
 
         pack();
@@ -207,68 +124,27 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonMenuIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMenuIniciarActionPerformed
-        // TODO add your handling code here:
-        tutorialV();
         jPanelMenu.remove(jButtonMenuIniciar);
-        jLabelTituloJogo.setText("Escolha sua Nave!");
-
-        jLabelEscNave1.setVisible(true);
-        jLabelEscNave1.setLocation(jLabelNave1.getX(), jLabelNave1.getY());
-        jPanelMenu.remove(jLabelNave1);
-        jPanelMenu.add(jLabelEscNave1);
-
-        jLabelEscNave2.setVisible(true);
-        jLabelEscNave2.setLocation(jLabelNave2.getX(), jLabelNave2.getY());
-        jPanelMenu.remove(jLabelNave2);
-        jPanelMenu.add(jLabelEscNave2);
-
+        jLabelTituloJogo.setText("ESCOLHA SUA NAVE!!!");
+        
+        criaTeclas();
+        escolhaNave();
+        
+        jPanelMenu.remove(naveVerMenu);
+        jPanelMenu.remove(naveAzulMenu);
         jButtonMenuIniciar.setVisible(false);
-
+        
         jPanelMenu.validate();
         jPanelMenu.repaint();
 
     }//GEN-LAST:event_jButtonMenuIniciarActionPerformed
-
-    private void jLabelEscNave1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEscNave1MouseClicked
-        // TODO add your handling code here:
-        Metricas.escNave = 1;
-        telaFase1();
-    }//GEN-LAST:event_jLabelEscNave1MouseClicked
-
-    private void jLabelEscNave2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEscNave2MouseClicked
-        // TODO add your handling code here:
-        Metricas.escNave = 2;
-        telaFase1();
-    }//GEN-LAST:event_jLabelEscNave2MouseClicked
-
+    
     public void telaFase1() {
         JFrame fase1 = new Fase1();
         fase1.setLocationRelativeTo(null);
         fase1.setVisible(true);
         // fecha o menu
         dispose();
-    }
-
-    public void tutorialV() {
-        jLabelMov.setVisible(true);
-        jLabelMov.setLocation(50, 90);
-        jPanelMenu.add(jLabelMov);
-
-        jLabelMovTiro.setVisible(true);
-        jLabelMovTiro.setLocation(450, 90);
-        jPanelMenu.add(jLabelMovTiro);
-
-        jLabelTecA.setVisible(true);
-        jLabelTecA.setLocation(35, 130);
-        jPanelMenu.add(jLabelTecA);
-
-        jLabelTecD.setVisible(true);
-        jLabelTecD.setLocation(130, 130);
-        jPanelMenu.add(jLabelTecD);
-
-        jLabelTecK.setVisible(true);
-        jLabelTecK.setLocation(467, 130);
-        jPanelMenu.add(jLabelTecK);
     }
 
     /**
@@ -305,19 +181,103 @@ public class Menu extends javax.swing.JFrame {
             }
         });
     }
+    
+    private void navesMenu() {
+        naveVerMenu = new JLabel();
+        naveVerMenu.setBounds(38, 221, 160, 160);
+        naveVerMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/MenuNave1.png")));
+        naveVerMenu.setVisible(true);
+        
+        naveAzulMenu = new JLabel();
+        naveAzulMenu.setBounds(423, 221, 160, 160);
+        naveAzulMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/MenuNave2.png")));
+        naveAzulMenu.setVisible(true);
+        
+        jPanelMenu.add(naveVerMenu);
+        jPanelMenu.add(naveAzulMenu);
+        
+    }
+    
+    private void escolhaNave() {
+        //Instanciacao da nave de escolha vermelha
+        naveVermelha = new JLabel();
+        naveVermelha.setBounds(38, 221, 160, 160);
+        naveVermelha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/MenuNave1.png")));
+        naveVermelha.setVisible(true);
+        naveVermelha.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                naveVermelhaMouseClicked(evt);
+            }
+        });
+        
+        //Instanciacao da nave de escolha azul
+        naveAzul = new JLabel();
+        naveAzul.setBounds(423, 221, 160, 160);
+        naveAzul.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/MenuNave2.png")));
+        naveAzul.setVisible(true);
+        naveAzul.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                naveAzulMouseClicked(evt);
+            }
+        });
+        jPanelMenu.add(naveVermelha);
+        jPanelMenu.add(naveAzul);
+        
+    }
+    
+    private void naveVermelhaMouseClicked(java.awt.event.MouseEvent evt) {
+        // TODO add your handling code here:
+        Metricas.escNave = 1;
+        telaFase1();
+    }
+    
+    private void naveAzulMouseClicked(java.awt.event.MouseEvent evt) {
+        // TODO add your handling code here:
+        Metricas.escNave = 2;
+        telaFase1();
+    }
+    
+    private void criaTeclas() {
+        tutMovimentos = new JLabel();
+        tutMovimentos.setBounds(50, 90, 134, 34);
+        tutMovimentos.setFont(new java.awt.Font("Comic Sans MS", 3, 24)); // NOI18N
+        tutMovimentos.setForeground(new java.awt.Color(255, 255, 255));
+        tutMovimentos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        tutMovimentos.setText("Movimentos");
+        
+        tutTiro = new JLabel();
+        tutTiro.setBounds(450, 90, 94, 34);
+        tutTiro.setFont(new java.awt.Font("Comic Sans MS", 3, 24)); // NOI18N
+        tutTiro.setForeground(new java.awt.Color(255, 255, 255));
+        tutTiro.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        tutTiro.setText("Tiro");
+
+        //Instanciacao de label da tecla A
+        teclaA = new JLabel();
+        teclaA.setBounds(35, 130, 70, 70);
+        teclaA.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/teclas/aR.png")));
+        teclaA.setVisible(true);
+        //Instanciacao de label da tecla D
+        teclaD = new JLabel();
+        teclaD.setBounds(130, 130, 70, 70);
+        teclaD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/teclas/dR.png")));
+        teclaD.setVisible(true);
+        //Instanciacao de label da tecla K
+        teclaK = new JLabel();
+        teclaK.setBounds(467, 130, 70, 70);
+        teclaK.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/teclas/kR.png")));
+        teclaK.setVisible(true);
+        //Adicionando labels ao panel
+        jPanelMenu.add(teclaA);
+        jPanelMenu.add(teclaD);
+        jPanelMenu.add(teclaK);
+        jPanelMenu.add(tutMovimentos);
+        jPanelMenu.add(tutTiro);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonMenuIniciar;
     private javax.swing.JLabel jLabelDesenvolvedor;
-    private javax.swing.JLabel jLabelEscNave1;
-    private javax.swing.JLabel jLabelEscNave2;
-    private javax.swing.JLabel jLabelMov;
-    private javax.swing.JLabel jLabelMovTiro;
-    private javax.swing.JLabel jLabelNave1;
-    private javax.swing.JLabel jLabelNave2;
-    private javax.swing.JLabel jLabelTecA;
-    private javax.swing.JLabel jLabelTecD;
-    private javax.swing.JLabel jLabelTecK;
     private javax.swing.JLabel jLabelTituloJogo;
     private javax.swing.JPanel jPanelMenu;
     // End of variables declaration//GEN-END:variables

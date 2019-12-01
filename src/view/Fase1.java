@@ -9,6 +9,7 @@ import control.Metricas;
 import java.util.Random;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import model.Asteroides;
 import model.Bullets;
 import model.nave;
@@ -25,22 +26,26 @@ public class Fase1 extends javax.swing.JFrame {
      * Creates new form Fase1
      */
     nave nave;
-    Bullets tiro;
+    Bullets tiro = new Bullets(0, 0);
     Asteroides ast;
 
     ThreadPrincipal thread;
     ThreadSom tSom = new ThreadSom();
+
+    private JLabel labelFim;
+    private JLabel labelDev;
 
     private JButton jButtonSim;
     private JButton jButtonNao;
 
     public Fase1() {
         initComponents();
-
+        System.out.println("p bounds - " + jPanelFase1.getBounds());
         gerarNave();
         gerarAst();
 
         tSom.start();
+
     }
 
     @SuppressWarnings("unchecked")
@@ -53,7 +58,6 @@ public class Fase1 extends javax.swing.JFrame {
         jLabelLifes = new javax.swing.JLabel();
         jLabelNumLifes = new javax.swing.JLabel();
         jLabelNivel = new javax.swing.JLabel();
-        jLabelFim = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Asteroids");
@@ -120,34 +124,95 @@ public class Fase1 extends javax.swing.JFrame {
                 .addContainerGap(372, Short.MAX_VALUE))
         );
 
-        jLabelFim.setFont(new java.awt.Font("Comic Sans MS", 3, 24)); // NOI18N
-        jLabelFim.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelFim.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelFim.setText("Parabéns! Você terminou o beta, sua pontuação foi: ");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanelFase1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(17, 17, 17)
-                    .addComponent(jLabelFim, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addGap(18, 18, 18)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanelFase1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(131, 131, 131)
-                    .addComponent(jLabelFim, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(132, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+        // TODO add your handling code here:
+        // andar Esquerda 
+        if (evt.getKeyChar() == 'a' || evt.getKeyChar() == 'A') {
+            nave.andarEsquerda();
+            nave.verEsquerda();
+
+        }
+        // andar Direita 
+        if (evt.getKeyChar() == 'd' || evt.getKeyChar() == 'D') {
+            nave.andarDireita();
+            nave.verDireita();
+        }
+        // tiro
+        if (evt.getKeyChar() == 'k' || evt.getKeyChar() == 'K') {
+            tSom.somTiroDisp();
+            gerarTiro();
+        }
+
+        // pause
+        if (evt.getKeyChar() == 'p' || evt.getKeyChar() == 'P') {
+            //Metricas.inGame = false;
+            //thread.stop();
+        }
+        // retorna a execucao da thread
+        if (evt.getKeyChar() == 'o' || evt.getKeyChar() == 'O') {
+            // Metricas.inGame = true;
+            // thread.resume();
+        }
+    }//GEN-LAST:event_formKeyPressed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Fase1.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Fase1.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Fase1.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Fase1.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Fase1().setVisible(true);
+            }
+        });
+
+    }
 
     private void gerarNave() {
         nave = new nave(280, 330);
@@ -249,11 +314,6 @@ public class Fase1 extends javax.swing.JFrame {
         // Para a thread principal
         thread.stop();
 
-        criaButtonSim();
-        criaButtonNao();
-        jPanelFase1.add(jButtonSim);
-        jPanelFase1.add(jButtonNao);
-
         jPanelFase1.remove(nave);
         jPanelFase1.remove(ast);
         jPanelFase1.remove(tiro);
@@ -264,114 +324,63 @@ public class Fase1 extends javax.swing.JFrame {
         jLabelNumLifes.setVisible(false);
         jLabelNumScore.setVisible(false);
 
-        jLabelFim.setText("<html>Parabéns! Você terminou o beta, sua<br/>pontuação foi: " + Metricas.score + " pontos <br/>" + "Deseja jogar novamente?" + "</html>");
-        jPanelFase1.add(jLabelFim);
+        criaButtons();
+        criajLabelFim();
 
         jPanelFase1.validate();
         jPanelFase1.repaint();
     }
 
-    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
-        // TODO add your handling code here:
-        // andar Esquerda 
-        if (evt.getKeyChar() == 'a' || evt.getKeyChar() == 'A') {
-            nave.andarEsquerda();
-            nave.verEsquerda();
+    private void criajLabelFim() {
+        //Mensagem de parabens por terminar o jogo
+        labelFim = new JLabel();
+        labelFim.setBounds(35, 120, 583, 154);
+        labelFim.setFont(new java.awt.Font("Comic Sans MS", 3, 24)); // NOI18N
+        labelFim.setForeground(new java.awt.Color(255, 255, 255));
+        labelFim.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelFim.setText("<html>Parabéns! Você terminou o beta<br/>sua pontuação foi: " + Metricas.score + " Pontos <br/>" + "Deseja jogar novamente?" + "</html>");
 
-        }
-        // andar Direita 
-        if (evt.getKeyChar() == 'd' || evt.getKeyChar() == 'D') {
-            nave.andarDireita();
-            nave.verDireita();
-        }
-        // tiro
-        if (evt.getKeyChar() == 'k' || evt.getKeyChar() == 'K') {
-            tSom.somTiroDisp();
-            gerarTiro();
-        }
+        //Informacao do desenvolvedor
+        labelDev = new JLabel();
+        labelDev.setBounds(210, 388, 186, 18);
+        labelDev.setFont(new java.awt.Font("Comic Sans MS", 3, 12)); // NOI18N
+        labelDev.setForeground(new java.awt.Color(255, 255, 255));
+        labelDev.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelDev.setText("Developed by Matheus Carvalho");
 
-        // pause
-        if (evt.getKeyChar() == 'p' || evt.getKeyChar() == 'P') {
-            //Metricas.inGame = false;
-            //thread.stop();
-        }
-        // retorna a execucao da thread
-        if (evt.getKeyChar() == 'o' || evt.getKeyChar() == 'O') {
-            // Metricas.inGame = true;
-            // thread.resume();
-        }
-    }//GEN-LAST:event_formKeyPressed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Fase1.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Fase1.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Fase1.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Fase1.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Fase1().setVisible(true);
-            }
-        });
-
+        jPanelFase1.add(labelFim);
+        jPanelFase1.add(labelDev);
     }
 
-    private void criaButtonSim() {
+    private void criaButtons() {
+        //Instaciacao de botao sim
         jButtonSim = new JButton();
         jButtonSim.setBackground(new java.awt.Color(153, 153, 153));
         jButtonSim.setFont(new java.awt.Font("Comic Sans MS", 3, 14)); // NOI18N
         jButtonSim.setForeground(new java.awt.Color(255, 255, 255));
         jButtonSim.setText("Sim");
-        jButtonSim.setBounds(150, 300, 70, 30);
+        jButtonSim.setBounds(120, 300, 70, 30);
         jButtonSim.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonSimActionPerformed(evt);
             }
         });
-    }
-
-    private void criaButtonNao() {
+        //Instanciacao de botao nao
         jButtonNao = new JButton();
         jButtonNao.setBackground(new java.awt.Color(153, 153, 153));
         jButtonNao.setFont(new java.awt.Font("Comic Sans MS", 3, 14)); // NOI18N
         jButtonNao.setForeground(new java.awt.Color(255, 255, 255));
         jButtonNao.setText("Não");
-        jButtonNao.setBounds(350, 300, 70, 30);
+        jButtonNao.setBounds(430, 300, 70, 30);
         jButtonNao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonNaoActionPerformed(evt);
             }
         });
+
+        jPanelFase1.add(jButtonSim);
+        jPanelFase1.add(jButtonNao);
+
     }
 
     private void jButtonSimActionPerformed(java.awt.event.ActionEvent evt) {
@@ -394,7 +403,6 @@ public class Fase1 extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabelFim;
     private javax.swing.JLabel jLabelLifes;
     private javax.swing.JLabel jLabelNivel;
     private javax.swing.JLabel jLabelNumLifes;
