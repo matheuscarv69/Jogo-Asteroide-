@@ -13,6 +13,7 @@ import model.Asteroides;
 import model.Bullets;
 import model.nave;
 import threads.ThreadPrincipal;
+import sons.ThreadSom;
 
 /**
  *
@@ -28,6 +29,7 @@ public class Fase1 extends javax.swing.JFrame {
     Asteroides ast;
 
     ThreadPrincipal thread;
+    ThreadSom tSom = new ThreadSom();
 
     private JButton jButtonSim;
     private JButton jButtonNao;
@@ -38,6 +40,7 @@ public class Fase1 extends javax.swing.JFrame {
         gerarNave();
         gerarAst();
 
+        tSom.start();
     }
 
     @SuppressWarnings("unchecked")
@@ -149,19 +152,17 @@ public class Fase1 extends javax.swing.JFrame {
     private void gerarNave() {
         nave = new nave(280, 330);
         jPanelFase1.add(nave);
+
     }
 
     private void gerarTiro() {
-        
         int a = nave.getX() + 20;
         int b = nave.getY() - 13;
 
         tiro = new Bullets(a, b);
         jPanelFase1.add(tiro);
-
         // Funcao de movimentacao do tiro 
         thread.getTiro(tiro);
-
     }
 
     private void gerarAst() {
@@ -205,7 +206,7 @@ public class Fase1 extends javax.swing.JFrame {
                         jPanelFase1.repaint();
                         stop();
                     }
-                    //System.out.println("time: " + Metricas.time);
+
                     try {
                         Thread.sleep(Metricas.time);
                     } catch (InterruptedException ex) {
@@ -219,17 +220,14 @@ public class Fase1 extends javax.swing.JFrame {
 
     public synchronized void niveis() {
         if (Metricas.score >= 70 && Metricas.score <= 150) {
-            //Metricas.time -= 30;
             Metricas.time = 2150;
             System.out.println("time: " + Metricas.time);
             jLabelNivel.setText("Nível 2");
         } else if (Metricas.score >= 300 && Metricas.score <= 450) {
-            // Metricas.time -= 60;
             Metricas.time = 1900;
             System.out.println("time: " + Metricas.time);
             jLabelNivel.setText("Nível 3");
         } else if (Metricas.score >= 500 && Metricas.score <= 600) {
-            //Metricas.time -= 80;
             Metricas.time = 1700;
             System.out.println("time: " + Metricas.time);
             jLabelNivel.setText("Nível 3");
@@ -246,6 +244,9 @@ public class Fase1 extends javax.swing.JFrame {
 
     public void telaFim() {
         Metricas.inGame = false;
+        // Para o som de background
+        tSom.stop();
+        // Para a thread principal
         thread.stop();
 
         criaButtonSim();
@@ -270,10 +271,8 @@ public class Fase1 extends javax.swing.JFrame {
         jPanelFase1.repaint();
     }
 
-
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
         // TODO add your handling code here:
-
         // andar Esquerda 
         if (evt.getKeyChar() == 'a' || evt.getKeyChar() == 'A') {
             nave.andarEsquerda();
@@ -287,8 +286,10 @@ public class Fase1 extends javax.swing.JFrame {
         }
         // tiro
         if (evt.getKeyChar() == 'k' || evt.getKeyChar() == 'K') {
+            tSom.somTiroDisp();
             gerarTiro();
         }
+
         // pause
         if (evt.getKeyChar() == 'p' || evt.getKeyChar() == 'P') {
             //Metricas.inGame = false;
@@ -299,8 +300,6 @@ public class Fase1 extends javax.swing.JFrame {
             // Metricas.inGame = true;
             // thread.resume();
         }
-
-
     }//GEN-LAST:event_formKeyPressed
 
     /**

@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import model.Asteroides;
 import model.Bullets;
 import model.nave;
+import sons.ThreadSom;
 
 /**
  *
@@ -30,6 +31,8 @@ public class ThreadPrincipal extends Thread {
     private static Rectangle rectAstD;
     private static Rectangle rectTiroD = new Rectangle(0, 0, 0, 0);
 
+    private ThreadSom tSom = new ThreadSom();
+
     public ThreadPrincipal(nave nave, Asteroides ast, JPanel jPanel, JLabel pontos, JLabel vidas, JLabel velocidade) {
         this.nave = nave;
         this.ast = ast;
@@ -47,6 +50,7 @@ public class ThreadPrincipal extends Thread {
         // dessa forma ele não gera dois jOptionPane
         while (Metricas.inGame) {
             ast.movAst();
+
             // Remove o asteroide ao atingir y = 420
             if (verLimiteAst()) {
                 jPanel.remove(ast);
@@ -58,9 +62,12 @@ public class ThreadPrincipal extends Thread {
                 jPanel.validate();
                 jPanel.repaint();
                 // contagem de vidas
+                tSom.somExpNave();
                 diminuiLife();
                 stop();
             }
+            // O rectAstD pega o asteroide para garantir que ele seja
+            // tangivel apos geracao de um novo asteroide
             rectAstD = new Rectangle(ast.getBounds());
 
             if (rectTiroD.intersects(rectAstD)) {
@@ -68,11 +75,10 @@ public class ThreadPrincipal extends Thread {
                 jPanel.remove(ast);
                 jPanel.validate();
                 jPanel.repaint();
-
+                tSom.somTiroAst();
                 somaScore();
                 stop();
             }
-
             // Muda a imagem da nave de acordo com a quantidade de vidas
             mudaNave();
             try {
@@ -91,7 +97,6 @@ public class ThreadPrincipal extends Thread {
             public void run() {
                 while (Metricas.inGame) {
                     tiro.movBullet();
-
                     // Funcao para remover o tiro caso ele atinge y = -26
                     if (verLimiteTiro()) {
                         jPanel.remove(tiro);
@@ -108,6 +113,7 @@ public class ThreadPrincipal extends Thread {
                         // Funcao que para a movimentacao do Asteroide thread principal
                         paraAst();
                         // contagem de pontos ao Tiro atingir Asteroide
+                        tSom.somTiroAst();
                         somaScore();
                         stop();
                     }
@@ -144,7 +150,6 @@ public class ThreadPrincipal extends Thread {
     public boolean colisaoNavAst() {
         Rectangle rectNave = new Rectangle(nave.getBounds());
         Rectangle rectAst = new Rectangle(ast.getBounds());
-
         return rectAst.intersects(rectNave);
     }
 
@@ -152,17 +157,14 @@ public class ThreadPrincipal extends Thread {
     public synchronized boolean colisaoTiroAst() {
         Rectangle rectTiro = new Rectangle(tiro.getBounds());
         Rectangle rectAst = new Rectangle(ast.getBounds());
-        //testeT = new Rectangle(tiro.getBounds());
-
+        // rectTiroD recebe o tiro para garatir que seja verificada a colisao com
+        // o asteroide gerado inicialmente antes da criacao de outro
         rectTiroD = new Rectangle(rectTiro);
-        //rectTiroD = new Rectangle(tiro.getBounds());
-
         return rectTiro.intersects(rectAst);
     }
 
     // Muda a imagem da nave de acordo com a quantidade de vidas
     public synchronized void mudaNave() {
-        // /
         if (Metricas.escNave == 1) {
             if (Metricas.lifes == 2) {
                 nave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/naves/Nave1-d1.png")));
@@ -171,7 +173,6 @@ public class ThreadPrincipal extends Thread {
             } else if (Metricas.lifes == 0) {
                 this.stop();
             }
-
         } else {
             if (Metricas.lifes == 2) {
                 nave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/naves/Nave2-d1.png")));
@@ -179,10 +180,8 @@ public class ThreadPrincipal extends Thread {
                 nave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/naves/Nave2-d2.png")));
             } else if (Metricas.lifes == 0) {
                 this.stop();
-
             }
         }
-
     }
 
     public synchronized void somaScore() {
@@ -194,5 +193,6 @@ public class ThreadPrincipal extends Thread {
         Metricas.lifes--;
         vidas.setText(String.valueOf(Metricas.lifes));
     }
+
     // final
 }

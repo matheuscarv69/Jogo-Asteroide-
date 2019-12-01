@@ -26,6 +26,7 @@ public class nave extends JLabel {
         this.x = x;
         this.y = y;
         setBounds(x, y, width, height);
+        
         if (Metricas.escNave == 1) {
             setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/naves/Nave1.png")));
         } else {

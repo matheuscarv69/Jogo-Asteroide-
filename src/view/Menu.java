@@ -18,8 +18,7 @@ public class Menu extends javax.swing.JFrame {
      * Creates new form Menu
      */
     public Menu() {
-        initComponents();      
-        
+        initComponents();
     }
 
     /**
@@ -209,11 +208,10 @@ public class Menu extends javax.swing.JFrame {
 
     private void jButtonMenuIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMenuIniciarActionPerformed
         // TODO add your handling code here:
-       
         tutorialV();
         jPanelMenu.remove(jButtonMenuIniciar);
         jLabelTituloJogo.setText("Escolha sua Nave!");
-        
+
         jLabelEscNave1.setVisible(true);
         jLabelEscNave1.setLocation(jLabelNave1.getX(), jLabelNave1.getY());
         jPanelMenu.remove(jLabelNave1);
@@ -225,34 +223,23 @@ public class Menu extends javax.swing.JFrame {
         jPanelMenu.add(jLabelEscNave2);
 
         jButtonMenuIniciar.setVisible(false);
-        
-        
+
         jPanelMenu.validate();
         jPanelMenu.repaint();
-       
+
     }//GEN-LAST:event_jButtonMenuIniciarActionPerformed
 
     private void jLabelEscNave1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEscNave1MouseClicked
         // TODO add your handling code here:
-        System.out.println("Nave 1 escolhida");
         Metricas.escNave = 1;
         telaFase1();
     }//GEN-LAST:event_jLabelEscNave1MouseClicked
 
     private void jLabelEscNave2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEscNave2MouseClicked
         // TODO add your handling code here:
-        System.out.println("Nave 2 escolhida");
         Metricas.escNave = 2;
         telaFase1();
     }//GEN-LAST:event_jLabelEscNave2MouseClicked
-
-    public void telaEscNave() {
-        JFrame escNave = new EscNave();
-        escNave.setLocationRelativeTo(null);
-        escNave.setVisible(true);
-        // fecha o menu
-        dispose();
-    }
 
     public void telaFase1() {
         JFrame fase1 = new Fase1();
@@ -261,25 +248,26 @@ public class Menu extends javax.swing.JFrame {
         // fecha o menu
         dispose();
     }
+
     public void tutorialV() {
         jLabelMov.setVisible(true);
-        jLabelMov.setLocation(50,90);
+        jLabelMov.setLocation(50, 90);
         jPanelMenu.add(jLabelMov);
-        
+
         jLabelMovTiro.setVisible(true);
-        jLabelMovTiro.setLocation(450,90);
+        jLabelMovTiro.setLocation(450, 90);
         jPanelMenu.add(jLabelMovTiro);
-        
+
         jLabelTecA.setVisible(true);
-        jLabelTecA.setLocation(35,130);
+        jLabelTecA.setLocation(35, 130);
         jPanelMenu.add(jLabelTecA);
-               
+
         jLabelTecD.setVisible(true);
         jLabelTecD.setLocation(130, 130);
         jPanelMenu.add(jLabelTecD);
-        
+
         jLabelTecK.setVisible(true);
-        jLabelTecK.setLocation(467,130);
+        jLabelTecK.setLocation(467, 130);
         jPanelMenu.add(jLabelTecK);
     }
 
