@@ -23,7 +23,6 @@ e visando uma melhor organização e administração de tempo o projeto foi refe
 algumas alterações visando otimização.
 
 O repositório original contendo todo o processo de criação de funções pode ser encontrado no link abaixo.
-
 https://github.com/matheuscarv69/Alfa-Jogo-Asteroids-Swing
 
 Redes Sociais: Instagram: @__mmcarvalho || Facebook: facebook.com/MatheusCarvalhoIX
