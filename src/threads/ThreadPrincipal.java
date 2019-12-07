@@ -33,7 +33,7 @@ public class ThreadPrincipal extends Thread {
     private static Rectangle rectAstD;
     private static Rectangle rectTiroD = new Rectangle(0, 0, 0, 0);
 
-    private ThreadSom tSom = new ThreadSom();
+    private ThreadSom tSom = new ThreadSom("somBackground.mp3");
 
     public ThreadPrincipal(nave nave, Asteroides ast, JPanel jPanel, JLabel pontos, JLabel labelLife1, JLabel labelLife2, JLabel labelLife3, JLabel velocidade) {
         this.nave = nave;

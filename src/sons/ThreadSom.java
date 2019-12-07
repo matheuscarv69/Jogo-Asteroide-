@@ -14,10 +14,16 @@ import javazoom.jl.player.Player;
 
 public class ThreadSom extends Thread {
 
+    private String nome;
+
+    public ThreadSom(String nome) {
+        this.nome = nome;
+    }
+    
     @Override
     public void run() {
         try {
-            InputStream file = getClass().getResourceAsStream("somBackground.mp3");
+            InputStream file = getClass().getResourceAsStream(nome);
             Player playMp3 = new Player(file);
             playMp3.play();
         } catch (Exception e) {
@@ -108,5 +114,22 @@ public class ThreadSom extends Thread {
             }
 
         }.start();
+    }
+    
+    public void menuSom() {
+        new Thread() {
+            @Override
+            public void run() {
+                try {
+                    InputStream file = getClass().getResourceAsStream("menuBackground.mp3");
+                    Player playMp3 = new Player(file);
+                    playMp3.play();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+        };
     }
 }

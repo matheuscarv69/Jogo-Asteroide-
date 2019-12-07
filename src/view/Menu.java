@@ -31,13 +31,14 @@ public class Menu extends javax.swing.JFrame {
     JLabel naveVerMenu;
     JLabel naveAzulMenu;
 
-    ThreadSom tSom = new ThreadSom();
+    ThreadSom tSom = new ThreadSom("menuBackground.mp3");
 
     public Menu() {
         initComponents();
         navesMenu();
         
         tSom.start();
+                
     }
 
     /**

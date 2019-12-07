@@ -30,7 +30,7 @@ public class Fase1 extends javax.swing.JFrame {
     Asteroides ast;
 
     ThreadPrincipal thread;
-    ThreadSom tSom = new ThreadSom();
+    ThreadSom tSom = new ThreadSom("somBackground.mp3");
 
     private JLabel labelFim;
     private JLabel labelDev;
@@ -342,6 +342,7 @@ public class Fase1 extends javax.swing.JFrame {
         jLabelNumScore.setVisible(false);
 
         criaButtons();
+
         criajLabelFim();
 
         jPanelFase1.validate();
@@ -355,8 +356,13 @@ public class Fase1 extends javax.swing.JFrame {
         labelFim.setFont(new java.awt.Font("Comic Sans MS", 3, 24)); // NOI18N
         labelFim.setForeground(new java.awt.Color(255, 255, 255));
         labelFim.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelFim.setText("<html>Parabéns! Você terminou o beta<br/>sua pontuação foi: " + Metricas.score + " Pontos <br/>" + "Deseja jogar novamente?" + "</html>");
-
+        // if para decidir qual mensagem deve ser mostrada ao fim do jogo 
+        if (Metricas.lifes != 0) {
+            labelFim.setText("<html>Parabéns! Você terminou o beta<br/>sua pontuação foi: " + Metricas.score + " Pontos <br/>" + "Deseja jogar novamente?" + "</html>");
+        } else {
+            labelFim.setText("<html>Poxa, não foi dessa vez! <br/>Sua pontuação foi: " + Metricas.score + " Pontos <br/>" + "Deseja jogar novamente?" + "</html>");
+        }
+        
         //Informacao do desenvolvedor
         labelDev = new JLabel();
         labelDev.setBounds(210, 388, 186, 18);
