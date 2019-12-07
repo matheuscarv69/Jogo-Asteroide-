@@ -34,15 +34,19 @@ public class Fase1 extends javax.swing.JFrame {
 
     private JLabel labelFim;
     private JLabel labelDev;
+    private JLabel labelLife1;
+    private JLabel labelLife2;
+    private JLabel labelLife3;
 
     private JButton jButtonSim;
     private JButton jButtonNao;
 
     public Fase1() {
         initComponents();
-        System.out.println("p bounds - " + jPanelFase1.getBounds());
+
         gerarNave();
         gerarAst();
+        criaLifes();
 
         tSom.start();
 
@@ -55,8 +59,6 @@ public class Fase1 extends javax.swing.JFrame {
         jPanelFase1 = new javax.swing.JPanel();
         jLabelScore = new javax.swing.JLabel();
         jLabelNumScore = new javax.swing.JLabel();
-        jLabelLifes = new javax.swing.JLabel();
-        jLabelNumLifes = new javax.swing.JLabel();
         jLabelNivel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -80,15 +82,6 @@ public class Fase1 extends javax.swing.JFrame {
         jLabelNumScore.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelNumScore.setText("0");
 
-        jLabelLifes.setFont(new java.awt.Font("Comic Sans MS", 3, 24)); // NOI18N
-        jLabelLifes.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelLifes.setText("Lifes:");
-
-        jLabelNumLifes.setFont(new java.awt.Font("Comic Sans MS", 3, 24)); // NOI18N
-        jLabelNumLifes.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelNumLifes.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabelNumLifes.setText("3");
-
         jLabelNivel.setFont(new java.awt.Font("Comic Sans MS", 3, 24)); // NOI18N
         jLabelNivel.setForeground(new java.awt.Color(255, 255, 255));
         jLabelNivel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -99,11 +92,7 @@ public class Fase1 extends javax.swing.JFrame {
         jPanelFase1Layout.setHorizontalGroup(
             jPanelFase1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelFase1Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(jLabelLifes)
-                .addGap(18, 18, 18)
-                .addComponent(jLabelNumLifes)
-                .addGap(112, 112, 112)
+                .addGap(237, 237, 237)
                 .addComponent(jLabelNivel, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
                 .addComponent(jLabelScore)
@@ -118,8 +107,6 @@ public class Fase1 extends javax.swing.JFrame {
                 .addGroup(jPanelFase1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelScore)
                     .addComponent(jLabelNumScore)
-                    .addComponent(jLabelLifes)
-                    .addComponent(jLabelNumLifes)
                     .addComponent(jLabelNivel))
                 .addContainerGap(372, Short.MAX_VALUE))
         );
@@ -252,7 +239,7 @@ public class Fase1 extends javax.swing.JFrame {
                     jPanelFase1.repaint();
 
                     // Funcao de movimentacao do asteroide
-                    thread = new ThreadPrincipal(nave, ast, jPanelFase1, jLabelNumScore, jLabelNumLifes, jLabelNivel);
+                    thread = new ThreadPrincipal(nave, ast, jPanelFase1, jLabelNumScore, labelLife1, labelLife2, labelLife3, jLabelNivel);
 
                     // Aumenta a velocidade de geração dos asteroides
                     niveis();
@@ -260,13 +247,16 @@ public class Fase1 extends javax.swing.JFrame {
                     // Verifica se a qunatidade de vidas acabou
                     if (Metricas.lifes == 0) {
                         telaFim();
+                        // Som de game over
+                        tSom.gameOver();
                         jPanelFase1.validate();
                         jPanelFase1.repaint();
                         stop();
                     }
                     if (Metricas.score >= 1000) {
-                        //geraJoptionPane();
+                        // Som de level complete
                         telaFim();
+                        tSom.levelComplete();
                         jPanelFase1.validate();
                         jPanelFase1.repaint();
                         stop();
@@ -307,6 +297,32 @@ public class Fase1 extends javax.swing.JFrame {
         }
     }
 
+    public void criaLifes() {
+        labelLife1 = new JLabel();
+        labelLife2 = new JLabel();
+        labelLife3 = new JLabel();
+
+        labelLife1.setBounds(20, 14, 43, 35);
+        labelLife2.setBounds(70, 14, 43, 35);
+        labelLife3.setBounds(120, 14, 43, 35);
+
+        if (Metricas.escNave == 1) {
+            labelLife1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/life/lifeN1.png")));
+            labelLife2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/life/lifeN1.png")));
+            labelLife3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/life/lifeN1.png")));
+        } else if (Metricas.escNave == 2) {
+            labelLife1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/life/lifeN2.png")));
+            labelLife2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/life/lifeN2.png")));
+            labelLife3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/life/lifeN2.png")));
+        }
+
+        jPanelFase1.add(labelLife1);
+        jPanelFase1.add(labelLife2);
+        jPanelFase1.add(labelLife3);
+        jPanelFase1.validate();
+        jPanelFase1.repaint();
+    }
+
     public void telaFim() {
         Metricas.inGame = false;
         // Para o som de background
@@ -318,10 +334,11 @@ public class Fase1 extends javax.swing.JFrame {
         jPanelFase1.remove(ast);
         jPanelFase1.remove(tiro);
 
-        jLabelLifes.setVisible(false);
+        labelLife1.setVisible(false);
+        labelLife2.setVisible(false);
+        labelLife3.setVisible(false);
         jLabelScore.setVisible(false);
         jLabelNivel.setVisible(false);
-        jLabelNumLifes.setVisible(false);
         jLabelNumScore.setVisible(false);
 
         criaButtons();
@@ -403,9 +420,7 @@ public class Fase1 extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabelLifes;
     private javax.swing.JLabel jLabelNivel;
-    private javax.swing.JLabel jLabelNumLifes;
     private javax.swing.JLabel jLabelNumScore;
     private javax.swing.JLabel jLabelScore;
     private javax.swing.JPanel jPanelFase1;

@@ -8,6 +8,7 @@ package view;
 import control.Metricas;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import sons.ThreadSom;
 
 /**
  *
@@ -23,17 +24,20 @@ public class Menu extends javax.swing.JFrame {
     JLabel teclaK;
     JLabel tutMovimentos;
     JLabel tutTiro;
-    
+
     JLabel naveVermelha;
     JLabel naveAzul;
-    
+
     JLabel naveVerMenu;
     JLabel naveAzulMenu;
-    
+
+    ThreadSom tSom = new ThreadSom();
+
     public Menu() {
         initComponents();
         navesMenu();
-        System.out.println("bounds - " + jLabelDesenvolvedor.getBounds());
+        
+        tSom.start();
     }
 
     /**
@@ -126,19 +130,19 @@ public class Menu extends javax.swing.JFrame {
     private void jButtonMenuIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMenuIniciarActionPerformed
         jPanelMenu.remove(jButtonMenuIniciar);
         jLabelTituloJogo.setText("ESCOLHA SUA NAVE!!!");
-        
+
         criaTeclas();
         escolhaNave();
-        
+
         jPanelMenu.remove(naveVerMenu);
         jPanelMenu.remove(naveAzulMenu);
         jButtonMenuIniciar.setVisible(false);
-        
+
         jPanelMenu.validate();
         jPanelMenu.repaint();
 
     }//GEN-LAST:event_jButtonMenuIniciarActionPerformed
-    
+
     public void telaFase1() {
         JFrame fase1 = new Fase1();
         fase1.setLocationRelativeTo(null);
@@ -181,23 +185,23 @@ public class Menu extends javax.swing.JFrame {
             }
         });
     }
-    
+
     private void navesMenu() {
         naveVerMenu = new JLabel();
         naveVerMenu.setBounds(38, 221, 160, 160);
         naveVerMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/MenuNave1.png")));
         naveVerMenu.setVisible(true);
-        
+
         naveAzulMenu = new JLabel();
         naveAzulMenu.setBounds(423, 221, 160, 160);
         naveAzulMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/MenuNave2.png")));
         naveAzulMenu.setVisible(true);
-        
+
         jPanelMenu.add(naveVerMenu);
         jPanelMenu.add(naveAzulMenu);
-        
+
     }
-    
+
     private void escolhaNave() {
         //Instanciacao da nave de escolha vermelha
         naveVermelha = new JLabel();
@@ -209,7 +213,7 @@ public class Menu extends javax.swing.JFrame {
                 naveVermelhaMouseClicked(evt);
             }
         });
-        
+
         //Instanciacao da nave de escolha azul
         naveAzul = new JLabel();
         naveAzul.setBounds(423, 221, 160, 160);
@@ -222,21 +226,23 @@ public class Menu extends javax.swing.JFrame {
         });
         jPanelMenu.add(naveVermelha);
         jPanelMenu.add(naveAzul);
-        
+
     }
-    
+
     private void naveVermelhaMouseClicked(java.awt.event.MouseEvent evt) {
         // TODO add your handling code here:
         Metricas.escNave = 1;
+        tSom.stop();
         telaFase1();
     }
-    
+
     private void naveAzulMouseClicked(java.awt.event.MouseEvent evt) {
         // TODO add your handling code here:
         Metricas.escNave = 2;
+        tSom.stop();
         telaFase1();
     }
-    
+
     private void criaTeclas() {
         tutMovimentos = new JLabel();
         tutMovimentos.setBounds(50, 90, 134, 34);
@@ -244,7 +250,7 @@ public class Menu extends javax.swing.JFrame {
         tutMovimentos.setForeground(new java.awt.Color(255, 255, 255));
         tutMovimentos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         tutMovimentos.setText("Movimentos");
-        
+
         tutTiro = new JLabel();
         tutTiro.setBounds(450, 90, 94, 34);
         tutTiro.setFont(new java.awt.Font("Comic Sans MS", 3, 24)); // NOI18N

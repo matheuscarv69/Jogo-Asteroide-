@@ -25,21 +25,25 @@ public class ThreadPrincipal extends Thread {
     private Asteroides ast;
     private JPanel jPanel;
     private JLabel pontos;
-    private JLabel vidas;
-    private JLabel velocidade;
+
+    private JLabel labelLife1;
+    private JLabel labelLife2;
+    private JLabel labelLife3;
 
     private static Rectangle rectAstD;
     private static Rectangle rectTiroD = new Rectangle(0, 0, 0, 0);
 
     private ThreadSom tSom = new ThreadSom();
 
-    public ThreadPrincipal(nave nave, Asteroides ast, JPanel jPanel, JLabel pontos, JLabel vidas, JLabel velocidade) {
+    public ThreadPrincipal(nave nave, Asteroides ast, JPanel jPanel, JLabel pontos, JLabel labelLife1, JLabel labelLife2, JLabel labelLife3, JLabel velocidade) {
         this.nave = nave;
         this.ast = ast;
         this.jPanel = jPanel;
         this.pontos = pontos;
-        this.vidas = vidas;
-        this.velocidade = velocidade;
+        this.labelLife1 = labelLife1;
+        this.labelLife2 = labelLife2;
+        this.labelLife3 = labelLife3;
+
         this.tiro = new Bullets(nave.getX() + 20, nave.getY() - 13);
         start();
     }
@@ -80,7 +84,7 @@ public class ThreadPrincipal extends Thread {
                 stop();
             }
             // Muda a imagem da nave de acordo com a quantidade de vidas
-            mudaNave();
+            mudaDanoNave();
             try {
                 Thread.sleep(10);
             } catch (InterruptedException ex) {
@@ -164,7 +168,7 @@ public class ThreadPrincipal extends Thread {
     }
 
     // Muda a imagem da nave de acordo com a quantidade de vidas
-    public synchronized void mudaNave() {
+    public synchronized void mudaDanoNave() {
         if (Metricas.escNave == 1) {
             if (Metricas.lifes == 2) {
                 nave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/naves/Nave1-d1.png")));
@@ -191,7 +195,15 @@ public class ThreadPrincipal extends Thread {
 
     public void diminuiLife() {
         Metricas.lifes--;
-        vidas.setText(String.valueOf(Metricas.lifes));
+
+        if (Metricas.lifes == 2) {
+            labelLife3.setVisible(false);
+        } else if (Metricas.lifes == 1) {
+            labelLife2.setVisible(false);
+        } else if (Metricas.lifes == 0) {
+            labelLife1.setVisible(false);
+        }
+
     }
 
     // final

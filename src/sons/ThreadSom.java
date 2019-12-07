@@ -76,4 +76,37 @@ public class ThreadSom extends Thread {
 
     }
 
+    public void gameOver() {
+        new Thread() {
+            @Override
+            public void run() {
+                try {
+                    InputStream file = getClass().getResourceAsStream("gameOver.mp3");
+                    Player playMp3 = new Player(file);
+                    playMp3.play();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+        }.start();
+    }
+    
+    public void levelComplete() {
+        new Thread() {
+            @Override
+            public void run() {
+                try {
+                    InputStream file = getClass().getResourceAsStream("levelComplete.mp3");
+                    Player playMp3 = new Player(file);
+                    playMp3.play();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+        }.start();
+    }
 }
