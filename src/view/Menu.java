@@ -6,6 +6,11 @@
 package view;
 
 import control.Metricas;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import sons.ThreadSom;
@@ -31,14 +36,20 @@ public class Menu extends javax.swing.JFrame {
     JLabel naveVerMenu;
     JLabel naveAzulMenu;
 
+    JButton jbuttonGit;
+    JButton jbuttonVoltar;
+
     ThreadSom tSom = new ThreadSom("menuBackground.mp3");
 
     public Menu() {
         initComponents();
         navesMenu();
-        
+
+        System.out.println("Button iniciar - " + jButtonMenuIniciar.getBounds());
+        System.out.println("Button sobre - " + jButtonMenuSobre.getBounds());
+
         tSom.start();
-                
+
     }
 
     /**
@@ -54,6 +65,7 @@ public class Menu extends javax.swing.JFrame {
         jButtonMenuIniciar = new javax.swing.JButton();
         jLabelDesenvolvedor = new javax.swing.JLabel();
         jLabelTituloJogo = new javax.swing.JLabel();
+        jButtonMenuSobre = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Asteroids Menu");
@@ -83,6 +95,17 @@ public class Menu extends javax.swing.JFrame {
         jLabelTituloJogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelTituloJogo.setText("ASTEROIDES");
 
+        jButtonMenuSobre.setBackground(new java.awt.Color(153, 153, 153));
+        jButtonMenuSobre.setFont(new java.awt.Font("Comic Sans MS", 3, 14)); // NOI18N
+        jButtonMenuSobre.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonMenuSobre.setText("SOBRE");
+        jButtonMenuSobre.setPreferredSize(new java.awt.Dimension(100, 23));
+        jButtonMenuSobre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonMenuSobreActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelMenuLayout = new javax.swing.GroupLayout(jPanelMenu);
         jPanelMenu.setLayout(jPanelMenuLayout);
         jPanelMenuLayout.setHorizontalGroup(
@@ -95,11 +118,13 @@ public class Menu extends javax.swing.JFrame {
                 .addContainerGap(174, Short.MAX_VALUE)
                 .addGroup(jPanelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelMenuLayout.createSequentialGroup()
-                        .addComponent(jButtonMenuIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(254, 254, 254))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelMenuLayout.createSequentialGroup()
                         .addComponent(jLabelTituloJogo, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(162, 162, 162))))
+                        .addGap(162, 162, 162))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelMenuLayout.createSequentialGroup()
+                        .addGroup(jPanelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButtonMenuSobre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonMenuIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(254, 254, 254))))
         );
         jPanelMenuLayout.setVerticalGroup(
             jPanelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -108,7 +133,9 @@ public class Menu extends javax.swing.JFrame {
                 .addComponent(jLabelTituloJogo)
                 .addGap(122, 122, 122)
                 .addComponent(jButtonMenuIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 174, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jButtonMenuSobre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 133, Short.MAX_VALUE)
                 .addComponent(jLabelDesenvolvedor)
                 .addContainerGap())
         );
@@ -130,6 +157,10 @@ public class Menu extends javax.swing.JFrame {
 
     private void jButtonMenuIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMenuIniciarActionPerformed
         jPanelMenu.remove(jButtonMenuIniciar);
+        jButtonMenuIniciar.setVisible(false);
+        jPanelMenu.remove(jButtonMenuSobre);
+        jButtonMenuSobre.setVisible(false);
+
         jLabelTituloJogo.setText("ESCOLHA SUA NAVE!!!");
 
         criaTeclas();
@@ -137,12 +168,25 @@ public class Menu extends javax.swing.JFrame {
 
         jPanelMenu.remove(naveVerMenu);
         jPanelMenu.remove(naveAzulMenu);
-        jButtonMenuIniciar.setVisible(false);
 
         jPanelMenu.validate();
         jPanelMenu.repaint();
 
     }//GEN-LAST:event_jButtonMenuIniciarActionPerformed
+
+    private void jButtonMenuSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMenuSobreActionPerformed
+        // TODO add your handling code here:
+        jPanelMenu.remove(jButtonMenuIniciar);
+        jButtonMenuIniciar.setVisible(false);
+        jPanelMenu.remove(jButtonMenuSobre);
+        jButtonMenuSobre.setVisible(false);
+
+        jLabelTituloJogo.setText("INFORMAÇÕES");
+        criaButtons();
+
+        jPanelMenu.validate();
+        jPanelMenu.repaint();
+    }//GEN-LAST:event_jButtonMenuSobreActionPerformed
 
     public void telaFase1() {
         JFrame fase1 = new Fase1();
@@ -282,8 +326,73 @@ public class Menu extends javax.swing.JFrame {
         jPanelMenu.add(tutTiro);
     }
 
+    private void criaButtons() {
+        //Instaciacao de botao sim
+        jbuttonGit = new JButton();
+        jbuttonGit.setBackground(new java.awt.Color(153, 153, 153));
+        jbuttonGit.setFont(new java.awt.Font("Comic Sans MS", 3, 14)); // NOI18N
+        jbuttonGit.setForeground(new java.awt.Color(255, 255, 255));
+        jbuttonGit.setText("Acesar GitHub");
+        jbuttonGit.setBounds(235, 191, 150, 23);
+        jbuttonGit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                try {
+                    jbuttonGitActionPerformed(evt);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+
+        jbuttonVoltar = new JButton();
+        jbuttonVoltar.setBackground(new java.awt.Color(153, 153, 153));
+        jbuttonVoltar.setFont(new java.awt.Font("Comic Sans MS", 3, 14)); // NOI18N
+        jbuttonVoltar.setForeground(new java.awt.Color(255, 255, 255));
+        jbuttonVoltar.setText("Voltar");
+        jbuttonVoltar.setBounds(235, 232, 150, 23);
+        jbuttonVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                try {
+                    jbuttonVoltarActionPerformed(evt);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+
+        jPanelMenu.add(jbuttonGit);
+        jPanelMenu.add(jbuttonVoltar);
+    }
+
+    private void jbuttonGitActionPerformed(java.awt.event.ActionEvent evt) throws IOException {
+        try {
+            // TODO add your handling code here:
+            java.awt.Desktop.getDesktop().browse(new java.net.URI("https://github.com/matheuscarv69"));
+        } catch (URISyntaxException ex) {
+            ex.printStackTrace();
+        }
+
+    }
+
+    private void jbuttonVoltarActionPerformed(java.awt.event.ActionEvent evt) throws IOException {
+        jPanelMenu.remove(jbuttonGit);
+        jbuttonGit.setVisible(false);
+        jPanelMenu.remove(jbuttonVoltar);
+        jbuttonVoltar.setVisible(false);
+
+        jButtonMenuIniciar.setVisible(true);
+        jButtonMenuSobre.setVisible(true);
+        jPanelMenu.add(jButtonMenuIniciar);
+        jPanelMenu.add(jButtonMenuSobre);
+
+        jLabelTituloJogo.setText("ASTEROIDES");
+        jPanelMenu.validate();
+        jPanelMenu.repaint();
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonMenuIniciar;
+    private javax.swing.JButton jButtonMenuSobre;
     private javax.swing.JLabel jLabelDesenvolvedor;
     private javax.swing.JLabel jLabelTituloJogo;
     private javax.swing.JPanel jPanelMenu;
