@@ -31,7 +31,7 @@ public class ThreadSom extends Thread {
         }
     }
 
-    public void somTiroDisp() {
+    public synchronized void somTiroDisp() {
         new Thread() {
             @Override
             public void run() {
@@ -46,7 +46,7 @@ public class ThreadSom extends Thread {
         }.start();
     }
 
-    public void somTiroAst() {
+    public synchronized void somTiroAst() {
         new Thread() {
             @Override
             public void run() {
@@ -64,7 +64,7 @@ public class ThreadSom extends Thread {
 
     }
 
-    public void somExpNave() {
+    public synchronized void somExpNave() {
         new Thread() {
             @Override
             public void run() {
@@ -82,7 +82,7 @@ public class ThreadSom extends Thread {
 
     }
 
-    public void gameOver() {
+    public synchronized void gameOver() {
         new Thread() {
             @Override
             public void run() {
@@ -99,7 +99,7 @@ public class ThreadSom extends Thread {
         }.start();
     }
     
-    public void levelComplete() {
+    public synchronized void levelComplete() {
         new Thread() {
             @Override
             public void run() {
@@ -116,7 +116,7 @@ public class ThreadSom extends Thread {
         }.start();
     }
     
-    public void menuSom() {
+    public synchronized void menuSom() {
         new Thread() {
             @Override
             public void run() {
